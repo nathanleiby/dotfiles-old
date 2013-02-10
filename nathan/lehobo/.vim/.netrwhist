@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/lehobo/Projects/Raxa-JSS/src/pharmacy'
+let g:netrw_dirhist_2='/home/lehobo/Projects/Raxa-JSS/src/registrationextjs4'
+let g:netrw_dirhist_3='/home/lehobo/Projects/Raxa-JSS/src'
