@@ -1,25 +1,22 @@
 ## Nathan Overrides ##
 export ECHO_NEST_API_KEY=JMNQE5WWIVGUQYHCM # EchoNest Api Key from Ted
+alias lh="ls -lh"
 alias py="python"
 alias ipy="ipython"
 alias ins="sudo apt-get install"
-alias remove="sudo apt-get remove"
 alias ce="cd ~/Projects/chuck_engine/engine/"
 alias start="nautilus"
-alias s="nautilus"
 alias p="cd ~/Projects"
 alias d="cd ~/Downloads/"
 alias dr="cd ~/Dropbox/"
 alias raxa="cd ~/Projects/Raxa-JSS/"
-alias om="cd ~/Projects/Eclipse/openmrs-core"
-alias jsbuilder="java -jar /opt/JSBuilder2/JSBuilder2.jar"
 
-alias g='git'
-# Autocomplete for 'g' as well
-complete -o default -o nospace -F _git g
+# shared drive aliases
+alias sp="cd /media/sharingIsCaring/Projects"
 
 export LD_LIBRARY_PATH=/usr/local/lib # Needed for Chromaprint Library to import in python
 export FIREFOX_PATH=/usr/local/firefox/firefox # To make selenium work
+export PATH=${PATH}:~/android-sdk-linux/tools
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -63,12 +60,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -126,6 +123,13 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+
+
+
 export PATH=/opt/SenchaSDKTools-2.0.0-beta3:$PATH
 
 export SENCHA_SDK_TOOLS_2_0_0_BETA3="/opt/SenchaSDKTools-2.0.0-beta3"
+
+export PATH=/home/mintchip/bin/Sencha/Cmd/3.0.0.250:$PATH
+
+export SENCHA_CMD_3_0_0="/home/mintchip/bin/Sencha/Cmd/3.0.0.250"
