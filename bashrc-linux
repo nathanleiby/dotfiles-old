@@ -1,5 +1,4 @@
 ## Nathan Overrides ##
-export ECHO_NEST_API_KEY=JMNQE5WWIVGUQYHCM # EchoNest Api Key from Ted
 alias lh="ls -lh"
 alias py="python"
 alias ipy="ipython"
