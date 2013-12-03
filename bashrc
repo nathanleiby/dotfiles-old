@@ -44,10 +44,16 @@ syspip(){
 
 export PATH="/usr/local/heroku/bin:$PATH"
 
-### Node Package Manager (NPM)
-
-# have npm-installed binaries picked up
+### NodeJS
+# node package manager - have npm-installed binaries picked up
 export PATH=/usr/local/share/npm/bin:$PATH
+
+# node version manager
+. ~/nvm/nvm.sh
+
+### Homebrew
+# make sure that any files Homebrew installs will be in your system path
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 ##############################################################################
 # 02. Aliases                                                                #

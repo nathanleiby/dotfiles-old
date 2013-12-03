@@ -7,9 +7,8 @@
 ########## Variables
 
 dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc bash_profile"    # list of files/folders to symlink in homedir
-#files="bashrc bash_profile vimrc vim zshrc oh-my-zsh private scrotwm.conf Xresources"    # list of files/folders to symlink in homedir
+olddir=~/dotfiles/old             # old dotfiles backup directory
+files="bashrc bash_profile gitconfig git-completion.bash"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -24,9 +23,20 @@ cd $dir
 echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
+echo ""
+echo "Moving any existing dotfiles from ~ to $olddir"
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
-    echo "Creating symlink to $file in home directory."
+    echo "File: $file" 
+    if [ -f ~/.$file ]
+    then
+    	echo "...Copying to $olddir"
+	   	cp ~/.$file $olddir
+	   	echo "...Removing ~/.$file"
+    	rm ~/.$file
+	else
+		echo "...~/.$file doesn't yet exist"
+	fi
+	echo "...Creating symlink"
     ln -s $dir/$file ~/.$file
+    echo ""
 done
