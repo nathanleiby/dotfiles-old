@@ -1,7 +1,7 @@
 {
 	"auto_complete": true,
 	"close_windows_when_empty": false,
-	"color_scheme": "Packages/Color Scheme - Default/Neon.tmTheme",
+	"color_scheme": "Packages/Neon Color Scheme/Neon.tmTheme",
 	"detect_slow_plugins": false,
 	"draw_white_space": "selection",
 	"find_selected_text": true,
@@ -18,14 +18,18 @@
 		"site"
 	],
 	"font_face": "Source Code Pro",
+	"font_size": 10.0,
 	"font_options":
 	[
 		"subpixel_antialias"
 	],
-	"font_size": 10.0,
-	"highlight_line": true,
-	"ignored_packages":[],
-	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true
-}
 
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"tab_size": 2
+}
