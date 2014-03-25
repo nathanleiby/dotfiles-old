@@ -59,6 +59,10 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # 02. Aliases                                                                #
 ##############################################################################
 
+### CoffeeScript
+alias c='coffee'
+complete -o default -o nospace -F coffee g
+
 ### Grep
 
 alias grep='grep --color'
@@ -88,21 +92,26 @@ complete -o default -o nospace -F _git g
 alias gs='git status'
 alias gst='git status -uno' #tracked files only
 alias gss='git status -sb' # short status
-alias gd='git diff -w' #ignore whitespace
+alias gd='git diff' #ignore whitespace
+alias gdw='git diff -w' #ignore whitespace
 alias gdp='gd HEAD^1' #diff currect state against previous commit
-alias ga='git add'
-alias gau='git add -u'
-alias gaa='git add -A'
+alias ga='git add -p'
+alias gau='git add -u -p'
+alias gaa='git add -A -p'
 alias gb='git branch'
 alias gc='git commit'
 alias gca='git commit --amend'
 alias gcv='git commit --no-verify' #skips pre-commit hook (tests), e.g. for simple amend of message
+
 alias gl='git log'
 alias gls='git log --oneline --decorate' # short git log
 alias gco='git checkout'
 alias gpp='git pull && git push'
 alias gr='git reset'
 alias groll='git checkout HEAD~1' #rollback 1 commit
+
+### Dotfiles
+alias dot='cd ~/dotfiles'
 
 ### Other
 
@@ -177,8 +186,6 @@ if [[ -n `which brew` ]]; then
     [[ -e $comp ]] && source $comp
 done
 fi
-
-export EDITOR='vim'
 
 ## Tab Completions
 set completion-ignore-case On
@@ -341,3 +348,38 @@ function pgrep {
   local exclude="\.svn|\.git|\.swp|\.coverage|\.pyc|_build"
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
+
+#export EDITOR='vim'
+export EDITOR='subl -w'
+
+# TODO: This belong somewhere else, otherwise cant be invoked by sudo user
+allcrons(){
+    for user in $(cut -f1 -d: /etc/passwd); do crontab -u $user -l; done
+}
+
+# Vagrant autocompletion
+if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
+    source `brew --prefix`/etc/bash_completion.d/vagrant
+fi
+# complete -W "$(echo `vagrant --help | awk '/box/,/up/ {print $1}'`;)" vagrant
+
+# Go Version Manager (gvm)
+if [[ -s $HOME/.gvm/scripts/gvm ]]; then
+    source $HOME/.gvm/scripts/gvm
+fi
+
+
+export PATH=/usr/local/packer:$PATH
+
+nis() {
+  npm install $@ --save
+}
+
+# Support for bazaar
+# https://github.com/Homebrew/homebrew/issues/316
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
+
+
+alias grsp='git reset --soft HEAD~1'
+alias v='vim'

@@ -3,3 +3,6 @@
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
+source ~/.clever_bash
+. ~/nvm/nvm.sh
+source /usr/local/bin/virtualenvwrapper.sh

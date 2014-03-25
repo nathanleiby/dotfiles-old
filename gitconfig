@@ -43,6 +43,10 @@ ls = ls-files
 
 # Show files ignored by git:
 ign = ls-files -o -i --exclude-standard
+
+# get commit sha associated with a tag
+tagcommit = !sh -c 'git rev-list $0 | head -n 1'
+
 [advice]
 statusHints = false
 [diff]
@@ -56,3 +60,10 @@ stat = true
 ### Experimental
 
 # https://github.com/alikins/gitconfig/blob/master/gitconfig
+[user]
+	name = Nathan Leiby
+	email = nathan.leiby@clever.com
+[push]
+	default = current
+[credential]
+	helper = osxkeychain
