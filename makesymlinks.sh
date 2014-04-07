@@ -30,3 +30,8 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# symlink scripts directory
+echo "Creating symlink for scripts."
+ln -s $dir/scripts /usr/local/bin/scripts
+
