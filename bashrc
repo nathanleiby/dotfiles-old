@@ -423,3 +423,6 @@ source ~/.clever_bash
 source /usr/local/bin/virtualenvwrapper.sh
 
 alias grs="git reset --soft 'HEAD^'" # undo last commit, but keep all changes
+
+# Consider starting mongodb with a different data path
+#mongod --dbpath
