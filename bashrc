@@ -49,7 +49,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/usr/local/share/npm/bin:$PATH
 
 # node version manager
-. ~/nvm/nvm.sh
+#. ~/nvm/nvm.sh
+[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
 
 ### Homebrew
 # make sure that any files Homebrew installs will be in your system path
@@ -214,7 +215,6 @@ LIGHTNING_BOLT="⚡"
         MIDDOT="•"
      PLUSMINUS="±"
 
-
 function parse_git_branch {
   remote_pattern_ahead="Your branch is ahead of"
   remote_pattern_behind="Your branch is behind"
@@ -287,6 +287,9 @@ function setWindowTitle {
 }
 
 function set_prompt {
+  # Whenever displaying the prompt, write the previous line to disk:
+  history -a
+
   [[ -n $HOMEBREW_DEBUG_INSTALL ]] && \
     homebrew_prompt="${BROWN}Homebrew:${COLOR_NONE} debugging ${HOMEBREW_DEBUG_INSTALL}\n"
 
@@ -349,8 +352,8 @@ function pgrep {
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
 
-#export EDITOR='vim'
-export EDITOR='subl -w'
+export EDITOR='vim'
+#export EDITOR='subl -w'
 
 # TODO: This belong somewhere else, otherwise cant be invoked by sudo user
 allcrons(){
@@ -368,7 +371,6 @@ if [[ -s $HOME/.gvm/scripts/gvm ]]; then
     source $HOME/.gvm/scripts/gvm
 fi
 
-
 export PATH=/usr/local/packer:$PATH
 
 nis() {
@@ -379,7 +381,45 @@ nis() {
 # https://github.com/Homebrew/homebrew/issues/316
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
-
-
 alias grsp='git reset --soft HEAD~1'
 alias v='vim'
+
+## EXPERIMENTAL
+
+#alias npml='npm --registry http://npmjs.intranet:1337/'
+# npm install --save(-dev)
+
+
+HISTFILESIZE=1000000000
+HISTSIZE=1000000
+
+# append to history
+shopt -s histappend
+
+alias bash_analyze='cut -f1 -d" " .bash_history | sort | uniq -c | sort -nr | head -n 30'
+
+# Compress the cd, ls -l series of commands.
+alias lc="cl"
+function cl () {
+   if [ $# = 0 ]; then
+      cd && ll
+   else
+      cd "$*" && ll
+   fi
+}
+
+alias lt="ls -AGlFTtr" # alias of ls that puts recently modified files at the bottom
+alias mod="lt | tail"
+CDPATH='~/dev:~/Downloads'
+
+# autocompletion for bash commands
+source /etc/bash_completion
+
+# Press Ctrl+D twice before you exit shell...
+export IGNOREEOF=1
+
+source ~/.clever_bash
+. ~/nvm/nvm.sh
+source /usr/local/bin/virtualenvwrapper.sh
+
+alias grs="git reset --soft 'HEAD^'" # undo last commit, but keep all changes

@@ -58,12 +58,16 @@ stat = true
 # ...
 
 ### Experimental
-
 # https://github.com/alikins/gitconfig/blob/master/gitconfig
-[user]
-	name = Nathan Leiby
-	email = nathan.leiby@clever.com
 [push]
 	default = current
 [credential]
 	helper = osxkeychain
+[user]
+	name = Nathan Leiby
+	email = nathanleiby@gmail.com
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[push]
+	default = simple
