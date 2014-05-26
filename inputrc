@@ -1,0 +1,23 @@
+# Vim Key Bindings
+set editing-mode vi
+set keymap vi-command
+
+# "\e[A" and "\e[B" being whatever your terminal uses for up & down.
+
+"\e[A": history-search-backward
+
+"\e[B": history-search-forward
+
+# Two escapes clear command line.
+
+"\e\e": "\C-a\C-k"
+
+# autocompletion config
+set match-hidden-files on
+set completion-ignore-case on
+set visible-stats on # When listing possible file completions, put / after directory names and * after programs
+set show-all-if-ambiguous on
+
+# Iterm jump by word
+
+"\e[1;5C": forward-word
