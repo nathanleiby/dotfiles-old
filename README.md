@@ -15,3 +15,9 @@ Alfred
 Dropbox
 Google Drive
 Bowtie
+
+install [xcode command line tools](http://stackoverflow.com/questions/19066647/xcode-5-0-error-installing-command-line-tools)
+
+```bash
+xcode-select --install
+```
