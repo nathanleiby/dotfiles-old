@@ -21,3 +21,7 @@ install [xcode command line tools](http://stackoverflow.com/questions/19066647/x
 ```bash
 xcode-select --install
 ```
+
+## OSX Setup
+
+remap capslock to CTRL http://stackoverflow.com/questions/15435253/how-to-remap-the-caps-lock-key-to-control-in-os-x-10-8
