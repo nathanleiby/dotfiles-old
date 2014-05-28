@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "git push <heroku> master # normal push"
+echo "git push <heroku> -f <your branch>:master # push local branch (or HEAD) to Heroku"
+
