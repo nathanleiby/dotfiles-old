@@ -25,3 +25,8 @@ xcode-select --install
 ## OSX Setup
 
 remap capslock to CTRL http://stackoverflow.com/questions/15435253/how-to-remap-the-caps-lock-key-to-control-in-os-x-10-8
+
+X11
+http://xquartz.macosforge.org/landing/
+
+[BetterTouchTool](http://www.boastr.net/) - Shortcuts for window snapping

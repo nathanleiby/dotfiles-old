@@ -1,11 +1,3 @@
-### API Keys, etc
-if [ -f ~/.bash_profile_private ]
-then
-    source ~/.bash_profile_private
-else
-    echo "Could not find ~/.bash_profile_private. You may be missing API Keys, etc"
-fi
-
 ##############################################################################
 # 01. General                                                                #
 ##############################################################################
@@ -40,6 +32,9 @@ syspip(){
    PIP_REQUIRE_VIRTUALENV="" pip "$@"
 } # can use syspip command to install packages globally
 
+alias pip_install_requirements="pip install -r requirements.txt"
+alias pip_uninstall_all="pip freeze | xargs pip uninstall -y"
+
 ### Heroku Toolbelt
 
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -49,7 +44,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/usr/local/share/npm/bin:$PATH
 
 # node version manager
-#. ~/nvm/nvm.sh
+. ~/nvm/nvm.sh
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
 
 ### Homebrew
@@ -80,6 +75,10 @@ alias la='ls -FGa'
 # Show hidden files as list, colored
 alias ll='ls -FGal'
 
+# Short by time (reverse)
+alias lst='ls -ltr'
+alias lt='lst'
+
 ### Git
 
 # Tab completion for commands
@@ -90,6 +89,7 @@ alias g='git'
 complete -o default -o nospace -F _git g
 
 # Aliases
+# TODO: Add these to gitconfig instead
 alias gs='git status'
 alias gst='git status -uno' #tracked files only
 alias gss='git status -sb' # short status
@@ -103,6 +103,7 @@ alias gb='git branch'
 alias gc='git commit'
 alias gca='git commit --amend'
 alias gcv='git commit --no-verify' #skips pre-commit hook (tests), e.g. for simple amend of message
+alias gcav='git commit --amend --no-verify' #I like to live dangerously
 
 alias gl='git log'
 alias gls='git log --oneline --decorate' # short git log
@@ -110,6 +111,14 @@ alias gco='git checkout'
 alias gpp='git pull && git push'
 alias gr='git reset'
 alias groll='git checkout HEAD~1' #rollback 1 commit
+
+gitstashcheckoutpop() {
+    # Git checkout, with stash+pop
+    git stash
+    git checkout $1
+    git stash pop
+}
+alias gcs=gitstashcheckoutpop
 
 ### Dotfiles
 alias dot='cd ~/dotfiles'
@@ -389,7 +398,6 @@ alias v='vim'
 #alias npml='npm --registry http://npmjs.intranet:1337/'
 # npm install --save(-dev)
 
-
 HISTFILESIZE=1000000000
 HISTSIZE=1000000
 
@@ -413,16 +421,25 @@ alias mod="lt | tail"
 CDPATH='~/dev:~/Downloads'
 
 # autocompletion for bash commands
-source /etc/bash_completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
 
 # Press Ctrl+D twice before you exit shell...
 export IGNOREEOF=1
-
-source ~/.clever_bash
-. ~/nvm/nvm.sh
-source /usr/local/bin/virtualenvwrapper.sh
 
 alias grs="git reset --soft 'HEAD^'" # undo last commit, but keep all changes
 
 # Consider starting mongodb with a different data path
 #mongod --dbpath
+
+export PATH=$PATH:/usr/local/bin/scripts
+
+### API Keys, etc
+if [ -f ~/.bash_profile_private ]
+then
+    source $HOME/.bash_profile_private
+else
+    echo "Could not find $HOME/.bash_profile_private. You may be missing API Keys, etc"
+fi
+
