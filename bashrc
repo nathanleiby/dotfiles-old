@@ -181,6 +181,7 @@ alias p="cd ~/Projects"
 
 source ~/.fab-completion.bash
 source ~/.pip-completion.bash
+source ~/.heroku-completion.bash
 
 ## Homebrew
 export HOMEBREW_NO_EMOJI='1'
