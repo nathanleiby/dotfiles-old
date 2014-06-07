@@ -31,6 +31,13 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+# TODO: symlink sublime preferences
+SUBLIME_SETTINGS="$HOME/Library/Application Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings"
+echo "Moving sublime settings from $SUBLIME_SETTINGS to $olddir"
+mv $SUBLIME_SETTINGS $olddir
+echo "Symlinking sublime settings"
+ln -s "$dir/other_setup/sublime/Preferences.sublime-settings" $SUBLIME_SETTINGS
+
 # symlink scripts directory
 echo "Creating symlink for scripts."
 ln -s $dir/scripts /usr/local/bin/scripts
