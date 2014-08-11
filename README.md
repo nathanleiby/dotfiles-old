@@ -30,3 +30,5 @@ X11
 http://xquartz.macosforge.org/landing/
 
 [BetterTouchTool](http://www.boastr.net/) - Shortcuts for window snapping
+
+[Seil](https://github.com/tekezo/Seil) - Remap capslock to escape
