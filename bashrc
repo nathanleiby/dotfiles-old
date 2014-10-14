@@ -105,10 +105,11 @@ alias gca='git commit --amend'
 alias gcv='git commit --no-verify' #skips pre-commit hook (tests), e.g. for simple amend of message
 alias gcav='git commit --amend --no-verify' #I like to live dangerously
 
-alias gl='git log'
+alias gl='git lg'
 alias gls='git log --oneline --decorate' # short git log
 alias gco='git checkout'
 alias gpp='git pull && git push'
+alias gp='git pull'
 alias gr='git reset'
 alias groll='git checkout HEAD~1' #rollback 1 commit
 
