@@ -168,6 +168,9 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 # use Hub, light wrapper on git https://github.com/defunkt/hub for GitHub connection
 # eval "$(hub alias -s)"
 
+alias vundle="vim +PluginInstall +qall" # install all vundle bundles/plugins
+# error running godoc directly due to path/env mumbo jumbo https://github.com/moovweb/gvm/issues/45
+alias godocumentation="$GOROOT/bin/godoc -http=:8080"
 alias bp="vim ~/.bashrc ~/.bash_profile_private ~/.bash_profile"
 alias sb="source ~/.bashrc"
 alias sbp="source ~/.bashrc"
