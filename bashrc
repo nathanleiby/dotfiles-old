@@ -429,3 +429,6 @@ fi
 
 # TODO: Move methods out of here and include from separate files
 
+alias unixtime='date +%s'
+
+. ~/dotfiles/z/z.sh
