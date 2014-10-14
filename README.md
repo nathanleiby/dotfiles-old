@@ -10,17 +10,23 @@ iTerm2
 - https://coderwall.com/p/h6yfda
 - http://stackoverflow.com/questions/13017392/how-to-make-iterm2-send-control-h-for-backspace-so-it-works-for-all-linux-shells
 - http://www.michael-noll.com/blog/2007/01/04/word-movement-shortcuts-for-iterm-on-mac-os-x/
+- Open new tabs in same directory - http://nateeagle.com/2013/03/08/open-new-tabs-in-iterm-in-the-current-directory/
 
 Alfred
+
 Dropbox
+
 Google Drive
+
 Bowtie
 
-install [xcode command line tools](http://stackoverflow.com/questions/19066647/xcode-5-0-error-installing-command-line-tools)
+Install [xcode command line tools](http://stackoverflow.com/questions/19066647/xcode-5-0-error-installing-command-line-tools)
 
 ```bash
 xcode-select --install
 ```
+
+Xcode sometimes gets confused (Says "not available" when you attempt to install), but this is a sign that you may already have GUI app installed? In any case, may need this [`switch` workaround](http://stackoverflow.com/questions/9477860/xcode-select-switch-path-when-using-cli-toolkit).
 
 ## OSX Setup
 
