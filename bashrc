@@ -220,7 +220,7 @@ set completion-ignore-case On
      BROWN="\[\033[0;33m\]"
 COLOR_NONE="\[\033[0m\]"
 
-LIGHTNING_BOLT="⚡"
+LIGHTNING_BOLT="*"
       UP_ARROW="↑"
     DOWN_ARROW="↓"
       UD_ARROW="↕"
@@ -340,27 +340,6 @@ function git-root {
 }
 
 
-# Reveal current or provided folder in Path Finder
-function pf {
-  target_path="$(cd ${1:-"$PWD"} && PWD)"
-  osascript<<END
-tell app "Path Finder"
-  reveal POSIX file("$target_path")
-  activate
-end tell
-END
-}
-
-# Open a manpage in Preview, which can be saved to PDF
-function pman {
-   man -t "${1}" | open -f -a /Applications/Preview.app
-}
-
-# Open a manpage in the browser
-function bman {
-  man "${1}" | man2html | browser
-}
-
 function pgrep {
   local exclude="\.svn|\.git|\.swp|\.coverage|\.pyc|_build"
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
@@ -380,10 +359,10 @@ if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
 fi
 # complete -W "$(echo `vagrant --help | awk '/box/,/up/ {print $1}'`;)" vagrant
 
-# Go Version Manager (gvm)
-if [[ -s $HOME/.gvm/scripts/gvm ]]; then
-    source $HOME/.gvm/scripts/gvm
-fi
+# ## Go Version Manager (gvm)
+# if [[ -s $HOME/.gvm/scripts/gvm ]]; then
+#     source $HOME/.gvm/scripts/gvm
+# fi
 
 export PATH=/usr/local/packer:$PATH
 
@@ -423,7 +402,7 @@ function cl () {
 
 alias lt="ls -AGlFTtr" # alias of ls that puts recently modified files at the bottom
 alias mod="lt | tail"
-CDPATH='~/dev:~/Downloads'
+# CDPATH='~/dev:~/Downloads'
 
 # autocompletion for bash commands
 if [ -f /etc/bash_completion ]; then
