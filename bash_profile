@@ -3,3 +3,4 @@
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
+[[ -s "/Users/pika/.gvm/scripts/gvm" ]] && source "/Users/pika/.gvm/scripts/gvm"
