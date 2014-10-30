@@ -163,3 +163,6 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " vim-golang
 autocmd FileType go autocmd BufWritePre <buffer> Fmt " Automatically format on file save
+
+" Formatting for Git commit messages
+" TODO

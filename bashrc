@@ -32,12 +32,14 @@ export PIP_REQUIRE_VIRTUALENV=true
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### NodeJS
-# node package manager - have npm-installed binaries picked up
-export PATH=/usr/local/share/npm/bin:$PATH
 
 # node version manager
 . ~/nvm/nvm.sh
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
+
+# node package manager - have npm-installed binaries picked up
+# export PATH=/usr/local/share/npm/bin:$PATH
+# export PATH=$NVM_BIN:$PATH
 
 ### Homebrew
 # make sure that any files Homebrew installs will be in your system path
@@ -118,7 +120,7 @@ alias gdw='git diff -w' #ignore whitespace
 alias gdp='gd HEAD^1' #diff currect state against previous commit
 alias ga='git add -p'
 alias gau='git add -u -p'
-alias gaa='git add -A -p'
+alias gaa='git add -p -A'
 alias gb='git branch'
 alias gc='git commit'
 alias gca='git commit --amend'
