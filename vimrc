@@ -72,10 +72,12 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
 Bundle 'tpope/vim-leiningen'
-
+Plugin 'vim-scripts/VimClojure'
 " General
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'kien/ctrlp.vim'
+" Rust language
+Bundle 'wting/rust.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
