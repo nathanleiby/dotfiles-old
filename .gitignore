@@ -1,6 +1,5 @@
 oh-my-zsh/
-vim/vim
-vim/.netrwhist
+vim/bundle
 chef/
 private
 *.DS_Store
