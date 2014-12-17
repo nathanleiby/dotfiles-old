@@ -6,6 +6,36 @@
 ### Scripts - installed by env setup script
 export PATH=$PATH:/usr/local/bin/scripts
 
+### Homebrew
+# make sure that any files Homebrew installs will be in your system path
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+### Packer
+export PATH=/usr/local/packer:$PATH
+
+export EDITOR='vim'
+#export EDITOR='subl -w'
+
+## Homebrew
+export HOMEBREW_NO_EMOJI='1'
+export HOMEBREW_DEVELOPER='1'
+
+# Boot2Docker (OSX docker in a VM)
+export DOCKER_HOST=tcp://localhost:4243
+
+### Bash History
+HISTFILESIZE=1000000000
+HISTSIZE=1000000
+
+# append to history
+shopt -s histappend
+
+# Z search: https://github.com/rupa/z
+source ~/dotfiles/z/z.sh
+
+# Must press Ctrl+D twice before you exit shell
+export IGNOREEOF=1
+
 ### Ruby: RVM "manager"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -13,9 +43,16 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Python: Virtual Env
 
+# Support for bazaar (and virtualEnv?)
+# https://github.com/Homebrew/homebrew/issues/316
+# export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
 # Python: VirtualEnvWrapper
 export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=`which python`
+export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
 source /usr/local/bin/virtualenvwrapper.sh
+# brew link --overwrite python # TODO: salt-dev-env + Vagrant to spin up my dev box? look at example:
 
 # cache pip-installed packages to avoid re-downloading
 if [[ `uname` == 'Darwin' ]]; then
@@ -32,52 +69,21 @@ export PIP_REQUIRE_VIRTUALENV=true
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### NodeJS
+# node package manager - have npm-installed binaries picked up
+export PATH=/usr/local/share/npm/bin:$PATH
 
 # node version manager
 . ~/nvm/nvm.sh
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
 
-# node package manager - have npm-installed binaries picked up
-# export PATH=/usr/local/share/npm/bin:$PATH
-# export PATH=$NVM_BIN:$PATH
 
-### Homebrew
-# make sure that any files Homebrew installs will be in your system path
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-### Packer
-export PATH=/usr/local/packer:$PATH
-
-# export EDITOR='vim'
-export EDITOR='subl -w'
-
-## Homebrew
-export HOMEBREW_NO_EMOJI='1'
-export HOMEBREW_DEVELOPER='1'
-
-### Bash History
-HISTFILESIZE=1000000000
-HISTSIZE=1000000
-
-# append to history
-shopt -s histappend
-
-# Z search: https://github.com/rupa/z
-source ~/dotfiles/z/z.sh
-
-# Must press Ctrl+D twice before you exit shell
-export IGNOREEOF=1
-
-# Support for bazaar
-# https://github.com/Homebrew/homebrew/issues/316
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 ##############################################################################
 # 02. Aliases                                                                #
 ##############################################################################
 
 ### Bash Profile
-alias bp="subl ~/.bashrc ~/.bash_profile_private ~/.bash_profile"
+alias bp="$EDITOR ~/.bashrc ~/.bash_profile_private ~/.bash_profile"
 alias sbp="source ~/.bashrc"
 
 ### Python (PIP)
@@ -120,7 +126,7 @@ alias gdw='git diff -w' #ignore whitespace
 alias gdp='gd HEAD^1' #diff currect state against previous commit
 alias ga='git add -p'
 alias gau='git add -u -p'
-alias gaa='git add -p -A'
+alias gaa='git add -A -p'
 alias gb='git branch'
 alias gc='git commit'
 alias gca='git commit --amend'
@@ -157,172 +163,184 @@ alias unixtime='date +%s'
 # 03. Theme/Colors                                                           #
 ##############################################################################
 
-### Shell prompt
+# TODO: Only import this if using regular bash instead of zsh
 
-#export PS1="\n\[\e[0;36m\]┌─[\[\e[0m\]\[\e[1;33m\]\u\[\e[0m\]\[\e[1;36m\] @ \[\e[0m\]\[\e[1;33m\]\h\[\e[0m\]\[\e[0;36m\]]─[\[\e[0m\]\[\e[1;34m\]\w\[\e[0m\]\[\e[0;36m\]]\[\e[0;36m\]─[\[\e[0m\]\[\e[0;31m\]\t\[\e[0m\]\[\e[0;36m\]]\[\e[0m\]\n\[\e[0;36m\]└─[\[\e[0m\]\[\e[1;37m\]\$\[\e[0m\]\[\e[0;36m\]]› \[\e[0m\]"
-#export PS1="\u@\h\w$ "
+# ### Shell prompt
 
-# CLI Colors
-export CLICOLOR=1
+# #export PS1="\n\[\e[0;36m\]┌─[\[\e[0m\]\[\e[1;33m\]\u\[\e[0m\]\[\e[1;36m\] @ \[\e[0m\]\[\e[1;33m\]\h\[\e[0m\]\[\e[0;36m\]]─[\[\e[0m\]\[\e[1;34m\]\w\[\e[0m\]\[\e[0;36m\]]\[\e[0;36m\]─[\[\e[0m\]\[\e[0;31m\]\t\[\e[0m\]\[\e[0;36m\]]\[\e[0m\]\n\[\e[0;36m\]└─[\[\e[0m\]\[\e[1;37m\]\$\[\e[0m\]\[\e[0;36m\]]› \[\e[0m\]"
+# #export PS1="\u@\h\w$ "
 
-# Set "ls" colors
-export LSCOLORS=Gxfxcxdxbxegedabagacad
+# # CLI Colors
+# export CLICOLOR=1
 
-## Custom prompt
-# Colors
-       RED="\[\033[0;31m\]"
-      PINK="\[\033[1;31m\]"
-    YELLOW="\[\033[1;33m\]"
-     GREEN="\[\033[0;32m\]"
-  LT_GREEN="\[\033[1;32m\]"
-      BLUE="\[\033[0;34m\]"
-     WHITE="\[\033[1;37m\]"
-    PURPLE="\[\033[1;35m\]"
-      CYAN="\[\033[1;36m\]"
-     BROWN="\[\033[0;33m\]"
-COLOR_NONE="\[\033[0m\]"
+# # Set "ls" colors
+# export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-LIGHTNING_BOLT="*"
-      UP_ARROW="↑"
-    DOWN_ARROW="↓"
-      UD_ARROW="↕"
-      FF_ARROW="→"
-       RECYCLE="♺"
-        MIDDOT="•"
-     PLUSMINUS="±"
+# ## Custom prompt
+# # Colors
+#        RED="\[\033[0;31m\]"
+#       PINK="\[\033[1;31m\]"
+#     YELLOW="\[\033[1;33m\]"
+#      GREEN="\[\033[0;32m\]"
+#   LT_GREEN="\[\033[1;32m\]"
+#       BLUE="\[\033[0;34m\]"
+#      WHITE="\[\033[1;37m\]"
+#     PURPLE="\[\033[1;35m\]"
+#       CYAN="\[\033[1;36m\]"
+#      BROWN="\[\033[0;33m\]"
+# COLOR_NONE="\[\033[0m\]"
 
-function parse_git_branch {
-  remote_pattern_ahead="Your branch is ahead of"
-  remote_pattern_behind="Your branch is behind"
-  remote_pattern_ff="Your branch (.*) can be fast-forwarded."
-  diverge_pattern="Your branch and (.*) have diverged"
+# LIGHTNING_BOLT="*"
+#       UP_ARROW="↑"
+#     DOWN_ARROW="↓"
+#       UD_ARROW="↕"
+#       FF_ARROW="→"
+#        RECYCLE="♺"
+#         MIDDOT="•"
+#      PLUSMINUS="±"
 
-  branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+# function parse_git_branch {
+#   remote_pattern_ahead="Your branch is ahead of"
+#   remote_pattern_behind="Your branch is behind"
+#   remote_pattern_ff="Your branch (.*) can be fast-forwarded."
+#   diverge_pattern="Your branch and (.*) have diverged"
 
-  [[ -z $branch ]] && return
+#   branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 
-  git_status="$(git status 2> /dev/null)"
+#   [[ -z $branch ]] && return
 
-# Dirty?
-  if [[ ! ${git_status} =~ "working directory clean" ]]; then
-    [[ ${git_status} =~ "modified:" ]] && {
-      git_is_dirty="${RED}${LIGHTNING_BOLT}"
-    }
+#   git_status="$(git status 2> /dev/null)"
 
-    [[ ${git_status} =~ "Untracked files" ]] && {
-      git_is_dirty="${git_is_dirty}${WHITE}${MIDDOT}"
-    }
+# # Dirty?
+#   if [[ ! ${git_status} =~ "working directory clean" ]]; then
+#     [[ ${git_status} =~ "modified:" ]] && {
+#       git_is_dirty="${RED}${LIGHTNING_BOLT}"
+#     }
 
-    [[ ${git_status} =~ "new file:" ]] && {
-      git_is_dirty="${git_is_dirty}${LT_GREEN}+"
-    }
+#     [[ ${git_status} =~ "Untracked files" ]] && {
+#       git_is_dirty="${git_is_dirty}${WHITE}${MIDDOT}"
+#     }
 
-    [[ ${git_status} =~ "deleted:" ]] && {
-      git_is_dirty="${git_is_dirty}${RED}-"
-    }
+#     [[ ${git_status} =~ "new file:" ]] && {
+#       git_is_dirty="${git_is_dirty}${LT_GREEN}+"
+#     }
 
-    [[ ${git_status} =~ "renamed:" ]] && {
-      git_is_dirty="${git_is_dirty}${YELLOW}→"
-    }
-  fi
+#     [[ ${git_status} =~ "deleted:" ]] && {
+#       git_is_dirty="${git_is_dirty}${RED}-"
+#     }
 
-  # Are we ahead of, beind, or diverged from the remote?
-  if [[ ${git_status} =~ ${remote_pattern_ahead} ]]; then
-    remote="${YELLOW}${UP_ARROW}"
-  elif [[ ${git_status} =~ ${remote_pattern_ff} ]]; then
-    remote_ff="${WHITE}${FF_ARROW}"
-  elif [[ ${git_status} =~ ${remote_pattern_behind} ]]; then
-    remote="${YELLOW}${DOWN_ARROW}"
-  elif [[ ${git_status} =~ ${diverge_pattern} ]]; then
-    remote="${YELLOW}${UD_ARROW}"
-  fi
+#     [[ ${git_status} =~ "renamed:" ]] && {
+#       git_is_dirty="${git_is_dirty}${YELLOW}→"
+#     }
+#   fi
 
-  echo "${remote}${remote_ff}${GREEN}(${branch})${COLOR_NONE}${git_is_dirty}${COLOR_NONE}"
-}
+#   # Are we ahead of, beind, or diverged from the remote?
+#   if [[ ${git_status} =~ ${remote_pattern_ahead} ]]; then
+#     remote="${YELLOW}${UP_ARROW}"
+#   elif [[ ${git_status} =~ ${remote_pattern_ff} ]]; then
+#     remote_ff="${WHITE}${FF_ARROW}"
+#   elif [[ ${git_status} =~ ${remote_pattern_behind} ]]; then
+#     remote="${YELLOW}${DOWN_ARROW}"
+#   elif [[ ${git_status} =~ ${diverge_pattern} ]]; then
+#     remote="${YELLOW}${UD_ARROW}"
+#   fi
 
-function setWindowTitle {
-  case $TERM in
-    *xterm*|ansi)
-      echo -n -e "\033]0;$*\007"
-      ;;
-  esac
-}
+#   echo "${remote}${remote_ff}${GREEN}(${branch})${COLOR_NONE}${git_is_dirty}${COLOR_NONE}"
+# }
 
-function set_prompt {
-  # Whenever displaying the prompt, write the previous line to disk:
-  history -a
+# function setWindowTitle {
+#   case $TERM in
+#     *xterm*|ansi)
+#       echo -n -e "\033]0;$*\007"
+#       ;;
+#   esac
+# }
 
-  [[ -n $HOMEBREW_DEBUG_INSTALL ]] && \
-    homebrew_prompt="${BROWN}Homebrew:${COLOR_NONE} debugging ${HOMEBREW_DEBUG_INSTALL}\n"
+# function set_prompt {
+#   # Whenever displaying the prompt, write the previous line to disk:
+#   history -a
 
-  git_prompt="$(parse_git_branch)"
+#   [[ -n $HOMEBREW_DEBUG_INSTALL ]] && \
+#     homebrew_prompt="${BROWN}Homebrew:${COLOR_NONE} debugging ${HOMEBREW_DEBUG_INSTALL}\n"
 
-  PS1="[\w] ${git_prompt}${COLOR_NONE}\n${homebrew_prompt}\$ "
+#   git_prompt="$(parse_git_branch)"
 
-  # Include VirtualEnv in Git-aware prompt
-  if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
-      _OLD_VIRTUAL_PS1="$PS1"
-      if [ "x" != x ] ; then
-          PS1="$PS1"
-      else
-      if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
-          # special case for Aspen magic directories
-          # see http://www.zetadev.com/software/aspen/
-          PS1="[`basename \`dirname \"$VIRTUAL_ENV\"\``] $PS1"
-      else
-          PS1="(`basename \"$VIRTUAL_ENV\"`)$PS1"
-      fi
-      fi
-  fi
+#   PS1="[\w] ${git_prompt}${COLOR_NONE}\n${homebrew_prompt}\$ "
 
-  export PS1
-  setWindowTitle "${PWD/$HOME/~}"
-}
-export PROMPT_COMMAND=set_prompt
+#   # Include VirtualEnv in Git-aware prompt
+#   if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
+#       _OLD_VIRTUAL_PS1="$PS1"
+#       if [ "x" != x ] ; then
+#           PS1="$PS1"
+#       else
+#       if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
+#           # special case for Aspen magic directories
+#           # see http://www.zetadev.com/software/aspen/
+#           PS1="[`basename \`dirname \"$VIRTUAL_ENV\"\``] $PS1"
+#       else
+#           PS1="(`basename \"$VIRTUAL_ENV\"`)$PS1"
+#       fi
+#       fi
+#   fi
+
+#   export PS1
+#   setWindowTitle "${PWD/$HOME/~}"
+# }
+# export PROMPT_COMMAND=set_prompt
 
 ##############################################################################
-# 04. Auto-completion
+# 04. Bash Auto-completion
 ##############################################################################
 
-# Bash... itself
-source /etc/bash_completion
+# TODO: Do other autocompletion scripts if zsh
 
-# Fabric
-source ~/.fab-completion.bash
+if [[ $SHELL == "/bin/bash" ]]; then
 
-# Pip (python package manager)
-source ~/.pip-completion.bash
+  # Bash... itself
+  source /etc/bash_completion
 
-# Heroku
-source ~/.heroku-completion.bash
+  # Fabric
+  source ~/.fab-completion.bash
 
-# Homebrew
-if [[ -n `which brew` ]]; then
-  # Add Homebrew completions and homebrew sourced completions
-  source $(brew --repo)/Library/Contributions/brew_bash_completion.sh
-  for comp in \
-    $(brew --prefix)/etc/bash_completion \
-    $(brew --prefix)/etc/bash_completion.d/git-completion.bash
-  do
-    [[ -e $comp ]] && source $comp
-done
+  # Pip (python package manager)
+  source ~/.pip-completion.bash
+
+  # Heroku
+  source ~/.heroku-completion.bash
+
+  # Homebrew
+  if [[ -n `which brew` ]]; then
+    # Add Homebrew completions and homebrew sourced completions
+    source $(brew --repo)/Library/Contributions/brew_bash_completion.sh
+    for comp in \
+      $(brew --prefix)/etc/bash_completion \
+      $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+    do
+      [[ -e $comp ]] && source $comp
+  done
+  fi
+
+  # Vagrant
+  if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
+    source `brew --prefix`/etc/bash_completion.d/vagrant
+  fi
+  complete -W "$(echo `vagrant --help | awk '/box/,/up/ {print $1}'`;)" vagrant
+
+  # Git
+  source ~/.git-completion.bash
+
+  # Autocomplete for 'g' as well
+  alias g='git'
+  complete -o default -o nospace -F _git g
+
+  ## Tab Completion - overall settings
+  set completion-ignore-case On
+
+  ### Experimental
+  # Coffee
+  complete -o default -o nospace -F coffee g # Autocomplete for coffee?? but for what?
+
 fi
-
-# Vagrant
-if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
-  source `brew --prefix`/etc/bash_completion.d/vagrant
-fi
-complete -W "$(echo `vagrant --help | awk '/box/,/up/ {print $1}'`;)" vagrant
-
-# Git
-source ~/.git-completion.bash
-
-# Autocomplete for 'g' as well
-alias g='git'
-complete -o default -o nospace -F _git g
-
-## Tab Completion - overall settings
-set completion-ignore-case On
 
 ##############################################################################
 # 05. Experimental (TBD if useful)
@@ -354,13 +372,11 @@ allcrons(){
   for user in $(cut -f1 -d: /etc/passwd); do crontab -u $user -l; done
 }
 
-# Coffee
-complete -o default -o nospace -F coffee g # Autocomplete for coffee?? but for what?
 
-# ## Go Version Manager (gvm)
-# if [[ -s $HOME/.gvm/scripts/gvm ]]; then
-#     source $HOME/.gvm/scripts/gvm
-# fi
+## Go Version Manager (gvm)
+if [[ -s $HOME/.gvm/scripts/gvm ]]; then
+    source $HOME/.gvm/scripts/gvm
+fi
 
 alias grsp='git reset --soft HEAD~1'
 alias bash_analyze='cut -f1 -d" " .bash_history | sort | uniq -c | sort -nr | head -n 30'
