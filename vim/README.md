@@ -40,6 +40,12 @@ This is a listing of the keyboard shortcuts I frequently use in Vim. I'm sure th
 - `u` and `<ctrl>+r` - undo and redo
     - `u` - undo last command
     - `<ctrl>+r` - redo last command
+- `/` - search for text
+- `%s` - search
+    - `%s/<find>/<replace>/gci` - find `<find>` and replace with `<replace>`, taking extreme care to use `\` to escape characters
+    - `g` - globally
+    - `c` - confirm before replacing
+    - `i` - case insensitive
 
 
 ## References
