@@ -32,7 +32,6 @@ Plugin 'gmarik/Vundle.vim'
 " VUNDLE PLUGINS GO HERE:
 " GoLang
 Bundle 'fatih/vim-go'
-" Plugin 'nsf/gocode', {'rtp': 'vim/'}
 " CoffeeScript
 Bundle 'kchmck/vim-coffee-script'
 " Clojure
@@ -132,17 +131,42 @@ set backspace=indent,eol,start
 " hide annoying prompts
 set shortmess=atI " read more with :help shortmess
 
-" Automatically strip whitespace at EOL
-autocmd BufWritePre * :%s/\s\+$//e
-
+" ctrl-p
+" launch it with ctrl+p
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" set search path (nearest dir with .git etc, near current file)
+let g:ctrlp_working_path_mode = 'ra'
 " Hide some files/folders in ctrl-p search
 " https://github.com/kien/ctrlp.vim#basic-options
 set wildignore+=*.pyc
+
+" NerdTree
+" start it via ctrl+n
+map <C-n> :NERDTreeToggle<CR>
 
 " Autoformat
 " Customize python auto-formatting to use Clever standards
 let g:formatprg_python="autopep8"
 let g:formatprg_args_python="- -a --experimental --max-line-length=100 --indent-size 2"
+
+" Disable Arrow keys in Escape mode
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" Disable Arrow keys in Insert mode
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
+" no bell sound
+set visualbell
+
+" Formatting for Git commit messages
+" TODO
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Events                                                                 "
@@ -151,6 +175,9 @@ let g:formatprg_args_python="- -a --experimental --max-line-length=100 --indent-
 autocmd FileType make setlocal noexpandtab
 " In Ruby files, use 2 spaces instead of 4 for tabs
 "autocmd FileType ruby setlocal sw=2 ts=2 sts=2
+
+" Automatically strip whitespace at EOL
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Enable omnicompletion (to use, hold Ctrl+X then Ctrl+O while in Insert mode.
 set omnifunc=syntaxcomplete#Complete
@@ -197,43 +224,3 @@ set expandtab             " use spaces instead of tabs
 set smarttab              " use tabs at the start of a line, spaces elsewhere
 set nowrap                " don't wrap text
 set paste                 " Allow copy-paste into vim without adding tabs
-
-" Disable Arrow keys in Escape mode
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
-" Disable Arrow keys in Insert mode
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
-
-" Rainbow Parenthese on ALWAYS
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
-
-" no bell sound
-set visualbell
-
-" vim-golang
-" autocmd FileType go autocmd BufWritePre <buffer> Fmt " Automatically format on file save
-
-" ctrl-p
-" launch it with ctrl+p
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-" set search path (nearest dir with .git etc, near current file)
-let g:ctrlp_working_path_mode = 'ra'
-" set custom ignore (don't show these files in the search)
-"let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules|pyc)$'
-
-" NerdTree
-" start it via ctrl+n
-map <C-n> :NERDTreeToggle<CR>
-
-" Formatting for Git commit messages
-" TODO
