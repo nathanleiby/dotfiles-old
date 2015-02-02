@@ -59,7 +59,7 @@ Plugin 'scrooloose/nerdtree'
 
 " vim-surround: easily toggle among quote types, e.g.
 " > cs"' -> changes " surrounded word to be surrounded by ' instead
-" > cst' -> changes tag surround word (say, <p>hello</p>) to be ' surrounded 
+" > cst' -> changes tag surround word (say, <p>hello</p>) to be ' surrounded
 Plugin 'tpope/vim-surround'
 
 " rainbow-parentheses: make parens more readable by having multiple colors
@@ -71,15 +71,21 @@ Bundle 'bling/vim-airline'
 " Ctrlp - press <c-p> to navigate files via fuzzy matching search
 Bundle 'kien/ctrlp.vim'
 
+" Autoformat - code formatting
+Plugin 'Chiel92/vim-autoformat'
+
+" Salt-Vim: syntax highlighting for Salt .sls files
+Plugin 'saltstack/salt-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " TODO: understand 
+filetype plugin indent on    " TODO: understand
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 01. General                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" hidden - current buffer can be put to background without saving. remembers 
+" hidden - current buffer can be put to background without saving. remembers
 "   marks and history when it is re-opened.
 set hidden
 
@@ -107,7 +113,7 @@ augroup reload_vimrc " {
 augroup END " }
 
 " ignore case in searches unless a capital letter is inputted
-set ignorecase 
+set ignorecase
 set smartcase
 
 " update terminal title to show vim is running and on what file
@@ -125,6 +131,18 @@ set backspace=indent,eol,start
 
 " hide annoying prompts
 set shortmess=atI " read more with :help shortmess
+
+" Automatically strip whitespace at EOL
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Hide some files/folders in ctrl-p search
+" https://github.com/kien/ctrlp.vim#basic-options
+set wildignore+=*.pyc
+
+" Autoformat
+" Customize python auto-formatting to use Clever standards
+let g:formatprg_python="autopep8"
+let g:formatprg_args_python="- -a --experimental --max-line-length=100 --indent-size 2"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Events                                                                 "
@@ -190,30 +208,32 @@ map <right> <nop>
 imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
-imap <right> <nop> 
+imap <right> <nop>
 
 " Rainbow Parenthese on ALWAYS
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
 
 " no bell sound
 set visualbell
 
-" vim-golang 
-autocmd FileType go autocmd BufWritePre <buffer> Fmt " Automatically format on file save
+" vim-golang
+" autocmd FileType go autocmd BufWritePre <buffer> Fmt " Automatically format on file save
 
 " ctrl-p
-" launch it with ctrl+p 
+" launch it with ctrl+p
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " set search path (nearest dir with .git etc, near current file)
-let g:ctrlp_working_path_mode = 'ra' 
+let g:ctrlp_working_path_mode = 'ra'
+" set custom ignore (don't show these files in the search)
+"let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules|pyc)$'
 
 " NerdTree
 " start it via ctrl+n
-map <C-n> :NERDTreeToggle<CR>  
+map <C-n> :NERDTreeToggle<CR>
 
 " Formatting for Git commit messages
 " TODO
