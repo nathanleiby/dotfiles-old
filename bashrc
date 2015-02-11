@@ -20,9 +20,6 @@ export EDITOR='vim'
 export HOMEBREW_NO_EMOJI='1'
 export HOMEBREW_DEVELOPER='1'
 
-# Boot2Docker (OSX docker in a VM)
-export DOCKER_HOST=tcp://localhost:4243
-
 ### Bash History
 HISTFILESIZE=1000000000
 HISTSIZE=1000000
@@ -159,6 +156,13 @@ alias v='vim'
 # Time - print current unixtime
 alias unixtime='date +%s'
 
+# Docker
+# nsenter for boot2docker
+# https://github.com/jpetazzo/nsenter#docker-enter-with-boot2docker
+docker-enter() {
+  boot2docker ssh '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
+  boot2docker ssh -t sudo /var/lib/boot2docker/docker-enter "$@"
+}
 ##############################################################################
 # 03. Theme/Colors                                                           #
 ##############################################################################
@@ -346,6 +350,14 @@ fi
 # 05. Experimental (TBD if useful)
 ##############################################################################
 
+function gearman_status {
+  watch 'echo "Func | Queue | Run | Workers"; (echo status ; sleep 0.1) | nc 127.0.0.1 4730'
+}
+
+function gearman_workers {
+  watch 'echo "fd|   IP   | cid | : Functions " ; (echo workers ; sleep 0.1) | nc 127.0.0.1 4730'
+}
+
 # TODO: Add a 'list commands' for bash that will tell me all my private aliases in a beautiful way
 # TODO: Move methods out of here and include from separate files
 
@@ -400,3 +412,4 @@ if [ -f ~/.bash_profile_private ]; then
 else
   echo "Could not find $HOME/.bash_profile_private. You may be missing API Keys, etc"
 fi
+alias mongoose='mongoose -s /Users/nathanleiby/dev/clever-db/lib/schemas.coffee -m /Users/nathanleiby/dev/node_modules/mongoose'
