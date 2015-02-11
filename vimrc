@@ -76,6 +76,9 @@ Plugin 'Chiel92/vim-autoformat'
 " Salt-Vim: syntax highlighting for Salt .sls files
 Plugin 'saltstack/salt-vim'
 
+" Vim-R:
+Plugin 'vim-scripts/Vim-R-plugin'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " TODO: understand
