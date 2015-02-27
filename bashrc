@@ -133,6 +133,7 @@ alias gcav='git commit --amend --no-verify' #I like to live dangerously
 alias gl='git lg'
 alias gls='git log --oneline --decorate' # short git log
 alias gco='git checkout'
+alias gcom='git checkout master'
 alias gpp='git pull && git push'
 alias gp='git pull'
 alias gr='git reset'
