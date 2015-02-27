@@ -142,7 +142,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 " Hide some files/folders in ctrl-p search
 " https://github.com/kien/ctrlp.vim#basic-options
-set wildignore+=*.pyc
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|pyc'
 
 " NerdTree
 " start it via ctrl+n
