@@ -53,9 +53,6 @@ Plugin 'airblade/vim-gitgutter'
 " <leader>cu - uncomment a line
 Plugin 'scrooloose/nerdcommenter'
 
-" NerdTree - navigate directories and files
-Plugin 'scrooloose/nerdtree'
-
 " vim-surround: easily toggle among quote types, e.g.
 " > cs"' -> changes " surrounded word to be surrounded by ' instead
 " > cst' -> changes tag surround word (say, <p>hello</p>) to be ' surrounded
@@ -78,6 +75,30 @@ Plugin 'saltstack/salt-vim'
 
 " Vim-R:
 Plugin 'vim-scripts/Vim-R-plugin'
+
+" Terraform
+Bundle 'markcornick/vim-terraform.git'
+
+" Vim Instant Markdown
+Plugin 'suan/vim-instant-markdown'
+
+" Vim Markdown
+Plugin 'tpope/vim-markdown.git'
+
+" Json Formatting
+Plugin 'elzr/vim-json'
+
+" AutoCompletion
+Plugin 'Valloric/YouCompleteMe'
+
+" Multiple Cursors
+Plugin 'terryma/vim-multiple-cursors'
+
+" Tmux + Vim split navigation
+Bundle 'christoomey/vim-tmux-navigator'
+
+" Jade syntax
+Bundle 'digitaltoad/vim-jade'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -144,14 +165,15 @@ let g:ctrlp_working_path_mode = 'ra'
 " https://github.com/kien/ctrlp.vim#basic-options
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|pyc'
 
-" NerdTree
-" start it via ctrl+n
-map <C-n> :NERDTreeToggle<CR>
-
 " Autoformat
 " Customize python auto-formatting to use Clever standards
+autocmd Filetype python setlocal expandtab tabstop=2 shiftwidth=2
 let g:formatprg_python="autopep8"
 let g:formatprg_args_python="- -a --experimental --max-line-length=100 --indent-size 2"
+
+" Vim Instant Markdown
+let g:instant_markdown_slow = 0 " Refresh immediately. If off, refreshes on save or after delay in input
+let g:instant_markdown_autostart = 0 " start automatically. If off, start with :InstantMarkdownPreviewer
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
@@ -167,6 +189,11 @@ imap <right> <nop>
 
 " no bell sound
 set visualbell
+
+" support Neovim Python plugins, like YCM
+" https://github.com/neovim/neovim/issues/1887#issuecomment-71434601
+" let g:python_host_prog='/Users/nathanleiby/.virtualenvs/neovim/bin/python' " Point to virtualenv with neovim Python package installed
+let g:python_host_prog='/usr/local/bin/python' " Point to system Python, which has neovim Python package installed
 
 " Formatting for Git commit messages
 " TODO
@@ -201,7 +228,7 @@ autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 
 " Highlight characters that go over 80 columns
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%101v.\+/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 04. Vim UI                                                                 "
@@ -226,4 +253,5 @@ set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set smarttab              " use tabs at the start of a line, spaces elsewhere
 set nowrap                " don't wrap text
-set paste                 " Allow copy-paste into vim without adding tabs
+"set paste                 " Allow copy-paste into vim without adding tabs
+"(DISABLED b/c blocks YCM completion)
