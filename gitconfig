@@ -47,6 +47,7 @@ ign = ls-files -o -i --exclude-standard
 
 # get commit sha associated with a tag
 tagcommit = !sh -c 'git rev-list $0 | head -n 1'
+cob = checkout -b # checkout new branch
 
 [advice]
 statusHints = false
@@ -66,9 +67,10 @@ stat = true
 	helper = osxkeychain
 [user]
 	name = Nathan Leiby
-	email = nathanleiby@gmail.com
+	email = nathan.leiby@clever.com
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
 [push]
 	default = simple
+	default = current
