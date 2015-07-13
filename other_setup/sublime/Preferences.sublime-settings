@@ -1,8 +1,17 @@
 {
 	"auto_complete": true,
+	"caret_extra_bottom": 0,
+	"caret_extra_top": 0,
+	"caret_extra_width": 8,
+	"caret_style": "phase",
+	"close_windows_when_empty": false,
 	"color_scheme": "Packages/Neon Color Scheme/Neon.tmTheme",
+	"copy_with_empty_selection": false,
 	"detect_slow_plugins": false,
+	"drag_text": false,
+	"draw_minimap_border": true,
 	"draw_white_space": "selection",
+	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
 	"find_selected_text": true,
 	"findreplace_small": true,
@@ -18,47 +27,36 @@
 		"build",
 		"site"
 	],
+	"font_face": "Menlo",
+	"font_options":
+	[
+		"no_round",
+		"subpixel_antialias"
+	],
+	"font_size": 15,
+	"highlight_line": true,
 	"ignored_packages":
 	[
 		"Vintage",
-		"MarkdownEditing",
-		"Markdown"
+		"Markdown",
+		"Python Auto-Complete",
+		"MarkdownEditing"
 	],
 	"insert_final_newline": false,
-	"sidebar_small": true,
-	"tab_size": 2,
-	"tabs_small": true,
-	"theme": "predawn.sublime-theme",
-
-	// Typography
-	// "font_face": "Source Code Pro",
-	"font_face": "Menlo",
-	"font_size": 14,
-	"font_options": ["no_round", "subpixel_antialias"],
-	"highlight_line": true,
-	"caret_extra_width": 8,
-	"caret_extra_bottom": 0,
-	"caret_extra_top": 0,
-	"caret_style": "phase",
-	"word_wrap": false,
-
-	// Whitespace, Matching, Copy & Auto-Complete
-	"copy_with_empty_selection": false,
-	"drag_text": false,
 	"match_brackets_content": false,
 	"match_selection": false,
 	"match_tags": false,
-	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true,
-
-	// Interface & Behavior
-	"close_windows_when_empty": false,
-	"draw_minimap_border": true,
-	"enable_tab_scrolling": false,
-	"overlay_scroll_bars": "enabled",
 	"open_files_in_new_window": false,
+	"overlay_scroll_bars": "enabled",
 	"preview_on_click": false,
 	"scroll_past_end": true,
 	"scroll_speed": 5.0,
 	"show_full_path": false,
+	"sidebar_small": true,
+	"tab_size": 2,
+	"tabs_small": true,
+	"theme": "predawn.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"word_wrap": false
 }
