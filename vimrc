@@ -92,6 +92,9 @@ Plugin 'elzr/vim-json'
 Plugin 'Valloric/YouCompleteMe'
 
 " Multiple Cursors
+" <c-n> to start selecting
+" <c-p> to select previous
+" <ESC> to exit
 Plugin 'terryma/vim-multiple-cursors'
 
 " Tmux + Vim split navigation
@@ -122,8 +125,9 @@ set history=1000
 " allow % to not just match brackets - also if blocks, tags, and more
 runtime macros/matchit.vim
 
-" change <leader> key to ','
-let mapleader=","
+" change <leader> key to SPACE
+let mapleader = "\<Space>"
+"let mapleader=","
 
 " wildmenu - make <TAB> completion in command more useful (see more options)
 set wildmenu
@@ -149,6 +153,9 @@ set scrolloff=3
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
+" Allow copy paste to system clipboard (OSX)
+vnoremap <C-c> "*y
+
 " intuitive backspacing in insert mode
 set backspace=indent,eol,start
 
@@ -164,6 +171,18 @@ let g:ctrlp_working_path_mode = 'ra'
 " Hide some files/folders in ctrl-p search
 " https://github.com/kien/ctrlp.vim#basic-options
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|pyc'
+" make ctrl-p faster for git projects
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
 
 " Autoformat
 " Customize python auto-formatting to use Clever standards
@@ -197,6 +216,33 @@ let g:python_host_prog='/usr/local/bin/python' " Point to system Python, which h
 
 " Formatting for Git commit messages
 " TODO
+
+" Type <Space>o to open a new file
+nnoremap <Leader>o :CtrlP<CR>
+
+" Type <Space>w to save file
+nnoremap <Leader>w :w<CR>
+
+
+set clipboard=unnamed
+
+" Copy & paste to system clipboard with <Space>p and <Space>y
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+" Enter visual line mode with <Space><Space>
+nmap <Leader><Leader> V
+
+" Automatically jump to end of text you pasted
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Events                                                                 "
