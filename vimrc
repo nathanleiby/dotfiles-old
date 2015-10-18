@@ -58,6 +58,8 @@ Plugin 'scrooloose/nerdcommenter'
 " > cst' -> changes tag surround word (say, <p>hello</p>) to be ' surrounded
 Plugin 'tpope/vim-surround'
 
+Plugin 'tpope/vim-fugitive'
+
 " rainbow-parentheses: make parens more readable by having multiple colors
 Bundle 'kien/rainbow_parentheses.vim'
 
@@ -89,7 +91,7 @@ Plugin 'tpope/vim-markdown.git'
 Plugin 'elzr/vim-json'
 
 " AutoCompletion
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " Multiple Cursors
 " <c-n> to start selecting
@@ -102,6 +104,13 @@ Bundle 'christoomey/vim-tmux-navigator'
 
 " Jade syntax
 Bundle 'digitaltoad/vim-jade'
+
+" Syntastic
+" Bundle 'scrooloose/syntastic'
+" TODO: Fix how it works with Clever's Python syntax defaults, non Pep8
+
+" Go Autocompletion
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -190,6 +199,10 @@ autocmd Filetype python setlocal expandtab tabstop=2 shiftwidth=2
 let g:formatprg_python="autopep8"
 let g:formatprg_args_python="- -a --experimental --max-line-length=100 --indent-size 2"
 
+" JS formatting
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
 " Vim Instant Markdown
 let g:instant_markdown_slow = 0 " Refresh immediately. If off, refreshes on save or after delay in input
 let g:instant_markdown_autostart = 0 " start automatically. If off, start with :InstantMarkdownPreviewer
@@ -206,6 +219,13 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
+" Simpler movement in Vim Splits
+" e.g. Instead of ctrl-w then j, it’s just ctrl-j:
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " no bell sound
 set visualbell
 
@@ -213,6 +233,10 @@ set visualbell
 " https://github.com/neovim/neovim/issues/1887#issuecomment-71434601
 " let g:python_host_prog='/Users/nathanleiby/.virtualenvs/neovim/bin/python' " Point to virtualenv with neovim Python package installed
 let g:python_host_prog='/usr/local/bin/python' " Point to system Python, which has neovim Python package installed
+
+" KEEP logfiles for YCM failures
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
 
 " Formatting for Git commit messages
 " TODO
@@ -242,8 +266,13 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
+" Automatically re-highlight previous selection after indenting
+vnoremap < <gv
+vnoremap > >gv
 
-
+" vim-airline customizations
+" Show open buffers when there's only one tab open
+let g:airline#extensions#tabline#enabled = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Events                                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -273,8 +302,8 @@ autocmd BufRead,BufNewFile *.json set filetype=json
 autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 
 " Highlight characters that go over 80 columns
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%101v.\+/
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%101v.\+/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 04. Vim UI                                                                 "

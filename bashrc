@@ -51,6 +51,8 @@ export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
 source /usr/local/bin/virtualenvwrapper.sh
 # brew link --overwrite python # TODO: salt-dev-env + Vagrant to spin up my dev box? look at example:
 
+alias wo="workon"
+
 ### Heroku Toolbelt
 
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -147,6 +149,9 @@ alias v=vim
 
 # Time - print current unixtime
 alias unixtime='date +%s'
+
+# Daily tasks, timekeeping, ideas
+alias t="vim ~/Dropbox\ \(Personal\)/today.md ~/Dropbox\ \(Personal\)/dailylog.md ~/Dropbox\ \(Personal\)/ideas.md"
 
 ##############################################################################
 # 03. Theme/Colors                                                           #
@@ -259,8 +264,19 @@ alias c="cp"
 alias f="fg"
 alias xx="exit"
 
+# try out the Silver Searcher: https://github.com/ggreer/the_silver_searcher
+alias grep='ag'
+
 # error running godoc directly due to path/env mumbo jumbo https://github.com/moovweb/gvm/issues/45
 alias godocumentation="$GOROOT/bin/godoc -http=:8080"
+
+# Get UTC date
+alias utc="date -u"
+
+# do not like
+#alias force_ssh=/usr/bin/ssh
+#alias sshf=/usr/bin/ssh
+#alias ssh="mosh" # why? Tmux doesnt scrollback. also: git SSH creds not passed
 
 ##############################################################################
 # 06. Private Bash - may things in existing bash, too

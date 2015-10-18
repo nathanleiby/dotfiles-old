@@ -1,5 +1,6 @@
 oh-my-zsh/
 vim/bundle
+z
 chef/
 private
 *.DS_Store
