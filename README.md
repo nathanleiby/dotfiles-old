@@ -33,6 +33,8 @@ Xcode sometimes gets confused (Says "not available" when you attempt to install)
 
 ## OSX Setup
 
+Lots of great options to configure (OSX 10.11 El Capitan): https://gist.github.com/saetia/1623487
+
 remap capslock to CTRL http://stackoverflow.com/questions/15435253/how-to-remap-the-caps-lock-key-to-control-in-os-x-10-8
 
 X11
