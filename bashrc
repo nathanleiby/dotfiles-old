@@ -279,6 +279,16 @@ alias utc="date -u"
 #alias sshf=/usr/bin/ssh
 #alias ssh="mosh" # why? Tmux doesnt scrollback. also: git SSH creds not passed
 
+alias start="tmux attach -t base || tmux new -s base"
+# Reuse existing SSH auth, so credentials get passed correctly to tmux
+# over multiple sessions.
+# https://gist.github.com/admackin/4507371
+_ssh_auth_save() {
+    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock.$HOSTNAME"
+}
+alias screen='_ssh_auth_save ; export HOSTNAME=$(hostname) ; screen'
+alias tmux='_ssh_auth_save ; export HOSTNAME=$(hostname) ; tmux'
+
 ##############################################################################
 # 06. Private Bash - may things in existing bash, too
 ##############################################################################
