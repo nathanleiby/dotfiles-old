@@ -34,13 +34,6 @@ Plugin 'gmarik/Vundle.vim'
 Bundle 'fatih/vim-go'
 " CoffeeScript
 Bundle 'kchmck/vim-coffee-script'
-" Clojure
-Bundle 'tpope/vim-fireplace'
-Bundle 'guns/vim-clojure-static'
-Bundle 'tpope/vim-leiningen'
-Plugin 'vim-scripts/VimClojure'
-" Rust language
-Bundle 'wting/rust.vim'
 
 " Toml syntax highlighting
 Bundle 'cespare/vim-toml'
@@ -56,27 +49,24 @@ Plugin 'scrooloose/nerdcommenter'
 " vim-surround: easily toggle among quote types, e.g.
 " > cs"' -> changes " surrounded word to be surrounded by ' instead
 " > cst' -> changes tag surround word (say, <p>hello</p>) to be ' surrounded
-Plugin 'tpope/vim-surround'
+"Plugin 'tpope/vim-surround'
 
 Plugin 'tpope/vim-fugitive'
 
 " rainbow-parentheses: make parens more readable by having multiple colors
-Bundle 'kien/rainbow_parentheses.vim'
+"Bundle 'kien/rainbow_parentheses.vim'
 
 " airline - status bar
-Bundle 'bling/vim-airline'
+"Bundle 'bling/vim-airline'
 
 " Ctrlp - press <c-p> to navigate files via fuzzy matching search
 Bundle 'kien/ctrlp.vim'
 
 " Autoformat - code formatting
-Plugin 'Chiel92/vim-autoformat'
+"Plugin 'Chiel92/vim-autoformat'
 
 " Salt-Vim: syntax highlighting for Salt .sls files
 Plugin 'saltstack/salt-vim'
-
-" Vim-R:
-Plugin 'vim-scripts/Vim-R-plugin'
 
 " Terraform
 Bundle 'markcornick/vim-terraform.git'
@@ -85,13 +75,14 @@ Bundle 'markcornick/vim-terraform.git'
 Plugin 'suan/vim-instant-markdown'
 
 " Vim Markdown
-Plugin 'tpope/vim-markdown.git'
+"Plugin 'tpope/vim-markdown.git'
 
 " Json Formatting
 Plugin 'elzr/vim-json'
 
 " AutoCompletion
 "Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
 
 " Multiple Cursors
 " <c-n> to start selecting
@@ -102,15 +93,20 @@ Plugin 'terryma/vim-multiple-cursors'
 " Tmux + Vim split navigation
 Bundle 'christoomey/vim-tmux-navigator'
 
+" Gist
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
+
 " Jade syntax
-Bundle 'digitaltoad/vim-jade'
+"Bundle 'digitaltoad/vim-jade'
 
 " Syntastic
 " Bundle 'scrooloose/syntastic'
 " TODO: Fix how it works with Clever's Python syntax defaults, non Pep8
 
 " Go Autocompletion
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+"Plugin 'nsf/gocode', {'rtp': 'vim/'}
+"Bundle 'Blackrush/vim-gocode'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -199,13 +195,61 @@ autocmd Filetype python setlocal expandtab tabstop=2 shiftwidth=2
 let g:formatprg_python="autopep8"
 let g:formatprg_args_python="- -a --experimental --max-line-length=100 --indent-size 2"
 
+" YML formatting
+"" TODO This isn't working quite right..
+"autocmd Filetype yml setlocal expandtab tabstop=2 shiftwidth=2
+"autocmd Filetype yaml setlocal expandtab tabstop=2 shiftwidth=2
+
 " JS formatting
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
+" Coffeeformatting
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
 " Vim Instant Markdown
 let g:instant_markdown_slow = 0 " Refresh immediately. If off, refreshes on save or after delay in input
 let g:instant_markdown_autostart = 0 " start automatically. If off, start with :InstantMarkdownPreviewer
+
+"" Autocompletion
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return neocomplete#close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+
+" Go related mappings
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
+au FileType go nmap <Leader>t <Plug>(go-test)
+au FileType go nmap gd <Plug>(go-def-tab)
+
+" Gist-Vim
+let g:gist_post_private = 1 " Post gists privately by default
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
@@ -328,5 +372,8 @@ set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set smarttab              " use tabs at the start of a line, spaces elsewhere
 set nowrap                " don't wrap text
+"" (DISABLED b/c blocks Neocomplete)
 "set paste                 " Allow copy-paste into vim without adding tabs
-"(DISABLED b/c blocks YCM completion)
+
+"" Experimental
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>

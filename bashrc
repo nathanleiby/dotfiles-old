@@ -1,5 +1,5 @@
 ##############################################################################
-# 01. General Env                                                            #
+# 00. General Env                                                            #
 ##############################################################################
 
 ### TODO:
@@ -34,10 +34,6 @@ source ~/dotfiles/z/z.sh
 # Must press Ctrl+D twice before you exit shell
 export IGNOREEOF=1
 
-### Ruby: RVM "manager"
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Python: Virtual Env
 
@@ -130,6 +126,7 @@ alias gr='git reset'
 alias groll='git checkout HEAD~1' #rollback 1 commit
 
 alias gcob="git checkout -b"
+alias gpf="git push --force"
 
 # Application shortcuts
 alias py='python'
@@ -245,7 +242,7 @@ allcrons(){
 
 ## Golang: Brew installed
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
+#export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
@@ -260,13 +257,13 @@ alias mod="lt | tail"
 alias bd="cd .."
 
 # shorter!
-alias m="mv"
+#alias m="mv"
 alias c="cp"
 alias f="fg"
 alias xx="exit"
 
 # try out the Silver Searcher: https://github.com/ggreer/the_silver_searcher
-alias grep='ag'
+#alias grep='ag'
 
 # error running godoc directly due to path/env mumbo jumbo https://github.com/moovweb/gvm/issues/45
 alias godocumentation="$GOROOT/bin/godoc -http=:8080"
@@ -274,20 +271,31 @@ alias godocumentation="$GOROOT/bin/godoc -http=:8080"
 # Get UTC date
 alias utc="date -u"
 
-# do not like
-#alias force_ssh=/usr/bin/ssh
-#alias sshf=/usr/bin/ssh
-#alias ssh="mosh" # why? Tmux doesnt scrollback. also: git SSH creds not passed
-
-alias start="tmux attach -t base || tmux new -s base"
+# TODO: How to pass creds even further, via mosh?
 # Reuse existing SSH auth, so credentials get passed correctly to tmux
-# over multiple sessions.
-# https://gist.github.com/admackin/4507371
-_ssh_auth_save() {
-    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock.$HOSTNAME"
-}
-alias screen='_ssh_auth_save ; export HOSTNAME=$(hostname) ; screen'
-alias tmux='_ssh_auth_save ; export HOSTNAME=$(hostname) ; tmux'
+if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
+
+# Connect to default tmux session
+alias start="tmux attach -t base || tmux new -s base"
+
+# Home dir for Glide, go version manager
+# https://github.com/Masterminds/glide
+export GLIDE_HOME=~/.glide
+# Use Go1.5 vendoring
+export GO15VENDOREXPERIMENT=1
+
+alias got="go test"
+alias gob="go build"
+alias m="make"
+alias mt="make test"
+
+## Test adding Hub as git alias
+eval "$(hub alias -s)"
+
+alias sz="source ~/.zshrc"
 
 ##############################################################################
 # 06. Private Bash - may things in existing bash, too
