@@ -304,7 +304,9 @@ alias m="make"
 alias mt="make test"
 
 ## Test adding Hub as git alias
-eval "$(hub alias -s)"
+if [ `which hub` ]; then
+  eval "$(hub alias -s)"
+fi
 
 alias sz="source ~/.zshrc"
 
