@@ -45,8 +45,10 @@ export IGNOREEOF=1
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=`which python`
 export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
-source /usr/local/bin/virtualenvwrapper.sh
-# brew link --overwrite python # TODO: salt-dev-env + Vagrant to spin up my dev box? look at example:
+
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 alias wo="workon"
 
@@ -59,9 +61,10 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/usr/local/share/npm/bin:$PATH
 
 # node version manager
-. ~/nvm/nvm.sh
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
-
+if [ -f ~/nvm/nvm.sh ]; then
+  . ~/nvm/nvm.sh
+  [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
+fi
 
 
 ##############################################################################
@@ -166,16 +169,24 @@ alias t="vim ~/Dropbox\ \(Personal\)/today.md ~/Dropbox\ \(Personal\)/dailylog.m
 if [[ $SHELL == "/bin/bash" ]]; then
 
   # Bash... itself
-  source /etc/bash_completion
+  if [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+  fi
 
   # Fabric
-  source ~/.fab-completion.bash
+  if [ -f ~/.fab-completion.bash ]; then
+    source ~/.fab-completion.bash
+  fi
 
   # Pip (python package manager)
-  source ~/.pip-completion.bash
+  if [ -f ~/.pip-completion.bash ]; then
+    source ~/.pip-completion.bash
+  fi
 
   # Heroku
-  source ~/.heroku-completion.bash
+  if [ -f ~/.heroku-completion.bash ]; then
+    source ~/.heroku-completion.bash
+  fi
 
   # Homebrew
   if [[ -n `which brew` ]]; then
