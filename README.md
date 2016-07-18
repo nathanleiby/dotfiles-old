@@ -31,6 +31,11 @@ xcode-select --install
 
 Xcode sometimes gets confused (Says "not available" when you attempt to install), but this is a sign that you may already have GUI app installed? In any case, may need this [`switch` workaround](http://stackoverflow.com/questions/9477860/xcode-select-switch-path-when-using-cli-toolkit).
 
+## Tools
+
+- Hub - https://github.com/github/hub
+- AG - https://github.com/ggreer/the_silver_searcher
+
 ## OSX Setup
 
 Lots of great options to configure (OSX 10.11 El Capitan): https://gist.github.com/saetia/1623487
