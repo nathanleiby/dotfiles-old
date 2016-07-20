@@ -300,7 +300,7 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
 
 # Connect to default tmux session
-alias start="tmux attach -t base || tmux new -s base"
+alias st="tmux attach -t base || tmux new -s base"
 
 # Home dir for Glide, go version manager
 # https://github.com/Masterminds/glide
