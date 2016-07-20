@@ -63,8 +63,6 @@ stat = true
 # https://github.com/alikins/gitconfig/blob/master/gitconfig
 [push]
 	default = current
-[credential]
-	helper = osxkeychain
 [user]
 	name = Nathan Leiby
 	email = nathan.leiby@clever.com
