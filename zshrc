@@ -1,4 +1,3 @@
-
 # Path to your oh-my-zsh installation.
 export ZSH=/home/vagrant/.oh-my-zsh
 
@@ -24,7 +23,7 @@ setopt appendhistory
 source $ZSH/oh-my-zsh.sh
 
 # Include my bash profile, too
-source ~/.bash_profile
+source $HOME/.bash_profile
 
 # Vi Mode
 bindkey -v
