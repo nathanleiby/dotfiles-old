@@ -313,8 +313,8 @@ alias gob="go build"
 alias m="make"
 alias mt="make test"
 
-## Test adding Hub as git alias
-if [ `which hub` ]; then
+# if `hub` exists, add it as a Git alias
+if `which hub > /dev/null`; then
   eval "$(hub alias -s)"
 fi
 
