@@ -25,10 +25,8 @@ export PATH=/usr/local/packer:$PATH
 ### Personal binaries
 export PATH=$HOME/bin/:$PATH
 
-#export EDITOR='vim' # TODO: Compile YouCompleteMe binaries against vim. works?
-#export TERM="xterm-256color"
-#export EDITOR='nvim'
 export EDITOR=vim
+export VISUAL=vim
 
 ## Homebrew
 export HOMEBREW_NO_EMOJI='1'
