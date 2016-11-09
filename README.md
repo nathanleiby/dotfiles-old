@@ -21,8 +21,6 @@ Dropbox
 
 Google Drive
 
-Bowtie
-
 Install [xcode command line tools](http://stackoverflow.com/questions/19066647/xcode-5-0-error-installing-command-line-tools)
 
 ```bash
@@ -42,9 +40,6 @@ Lots of great options to configure (OSX 10.11 El Capitan): https://gist.github.c
 
 remap capslock to CTRL http://stackoverflow.com/questions/15435253/how-to-remap-the-caps-lock-key-to-control-in-os-x-10-8
 
-X11
-http://xquartz.macosforge.org/landing/
-
-[BetterTouchTool](http://www.boastr.net/) - Shortcuts for window snapping
+[BetterSnapTool](https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12) - Shortcuts for window snapping - paid. $3 for window snapping
 
 [Karabiner Elements](https://github.com/tekezo/Karabiner-Elements) - Remap capslock to be escape
