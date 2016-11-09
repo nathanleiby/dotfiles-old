@@ -47,4 +47,4 @@ http://xquartz.macosforge.org/landing/
 
 [BetterTouchTool](http://www.boastr.net/) - Shortcuts for window snapping
 
-[Seil](https://github.com/tekezo/Seil) - Remap capslock to be escape
+[Karabiner Elements](https://github.com/tekezo/Karabiner-Elements) - Remap capslock to be escape
