@@ -7,7 +7,7 @@ endif
 
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "go,html,javascript,lua,python"
+let g:vim_bootstrap_langs = "go,html,lua,python"
 let g:vim_bootstrap_editor = "vim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -78,14 +78,14 @@ Plug 'mattn/emmet-vim'
 
 " javascript
 "" Javascript Bundle
-Plug 'jelera/vim-javascript-syntax'
-
+" Plug 'jelera/vim-javascript-syntax'
+" Plug 'kchmck/vim-coffee-script'
 
 " lua
 "" Lua Bundle
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-lua-inspect'
-
+let g:lua_inspect_events = '' " disable by default
 
 " python
 "" Python Bundle
@@ -103,6 +103,9 @@ Plug 'mattn/webapi-vim' " Required for mattn/gist-vim
 Plug 'mattn/gist-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'mxw/vim-jsx'
+Plug 'hashivim/vim-terraform'
+Plug 'cespare/vim-toml'
 
 if filereadable(expand("~/.vimrc.local.bundles"))
   source ~/.vimrc.local.bundles
@@ -231,7 +234,7 @@ endif
 
 " vim-airline
 let g:airline_theme = 'powerlineish'
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
@@ -487,15 +490,16 @@ augroup END
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
 
-" javascript
-let g:javascript_enable_domhtmlcss = 1
-
 " vim-javascript
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
-augroup END
+" augroup vimrc-javascript
+"   autocmd!
+"   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
+" augroup END
 
+autocmd FileType javascript set formatprg=prettier\ --stdin
+" autocmd BufWritePre *.js :normal gggqG
+autocmd FileType typescript set formatprg=prettier\ --stdin
+" autocmd BufWritePre *.ts :normal gggqG
 
 " lua
 
@@ -632,4 +636,4 @@ augroup reload_vimrc " {
 augroup END " }
 
 " Typescript
-autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
+" autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
