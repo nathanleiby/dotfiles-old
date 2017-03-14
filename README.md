@@ -5,6 +5,11 @@ Installing Dotfiles...
 
 ## Dev Env Setup
 
+NeoVim
+
+- Install NeoVim: https://github.com/neovim/neovim/wiki/Installing-Neovim
+- Install Plugged (plugin manager): https://github.com/junegunn/vim-plug
+
 iTerm2
 
 - https://coderwall.com/p/h6yfda
@@ -40,7 +45,7 @@ Lots of great options to configure (OSX 10.11 El Capitan): https://gist.github.c
 
 Key repeat as fast as possible - https://github.com/mathiasbynens/dotfiles/issues/687
 
-remap capslock to CTRL http://stackoverflow.com/questions/15435253/how-to-remap-the-caps-lock-key-to-control-in-os-x-10-8
+remap capslock to CTRL -- update Keyboard settings in OSX
 
 [BetterSnapTool](https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12) - Shortcuts for window snapping - paid. $3 for window snapping
 
