@@ -26,8 +26,8 @@ export PATH=/usr/local/packer:$PATH
 ### Personal binaries
 export PATH=$HOME/bin/:$PATH
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 ## Homebrew
 export HOMEBREW_NO_EMOJI='1'
@@ -143,8 +143,8 @@ alias my_ip='/sbin/ifconfig en1| grep "inet "| cut -d" " -f2'
 
 # Vim
 alias vim=$EDITOR
-alias vi=vim
-alias v=vim
+alias vi=$EDITOR
+alias v=$EDITOR
 
 # Time - print current unixtime
 alias unixtime='date +%s'

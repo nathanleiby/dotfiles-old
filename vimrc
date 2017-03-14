@@ -47,11 +47,11 @@ if v:version >= 703
   Plug 'Shougo/vimshell.vim'
 endif
 
-if v:version >= 704
-  "" Snippets
-  Plug 'SirVer/ultisnips'
-  Plug 'FelikZ/ctrlp-py-matcher'
-endif
+" if v:version >= 704
+"   "" Snippets
+"   Plug 'SirVer/ultisnips'
+"   Plug 'FelikZ/ctrlp-py-matcher'
+" endif
 
 Plug 'honza/vim-snippets'
 
@@ -97,7 +97,9 @@ Plug 'davidhalter/jedi-vim'
 
 "" Include user's extra bundle
 Plug 'saltstack/salt-vim'
-Plug 'shougo/neocomplete.vim'
+" Plug 'shougo/neocomplete.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " NeoVim
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mattn/webapi-vim' " Required for mattn/gist-vim
 Plug 'mattn/gist-vim'
@@ -579,16 +581,16 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 0
+" let g:neocomplete#enable_at_startup = 0
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#enable_smart_case = 1
 " Neocomplete key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
-endfunction
-" <TAB>: completion.
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+"     return neocomplete#close_popup() . "\<CR>"
+" endfunction
+" <TAB>: completion.0
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Simpler movement in Vim Splits
@@ -666,3 +668,5 @@ augroup END " }
 
 " Typescript
 " autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
+
+let g:deoplete#enable_at_startup = 1
