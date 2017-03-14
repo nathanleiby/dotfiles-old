@@ -106,6 +106,35 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'hashivim/vim-terraform'
 Plug 'cespare/vim-toml'
+Plug 'sbdchd/neoformat'
+Plug 'stephpy/vim-yaml'
+
+" Configuration for 'prettier' auto-formatting for Javascript
+let g:neoformat_javascript_prettier = {
+	\ 'exe': './node_modules/.bin/prettier',
+	\ 'args': ['--stdin','--no-bracket-spacing'],
+	\ 'stdin': 1,
+	\ }
+
+let g:neoformat_javascript_prettiereslint = {
+	\ 'exe': './node_modules/.bin/prettier-eslint',
+	\ 'args': ['--stdin'],
+	\ 'stdin': 1,
+	\ }
+
+
+" TODO: Try using non-stin approach for eslint --fix (https://github.com/sbdchd/neoformat)
+" let g:neoformat_enabled_javascript = ['prettier', 'eslint']
+let g:neoformat_enabled_javascript = ['prettier']
+
+" Configuration for 'prettier' auto-formatting for Typescript
+let g:neoformat_typescript_prettier = {
+	\ 'exe': './node_modules/.bin/prettier',
+	\ 'args': ['--stdin','--no-bracket-spacing'],
+	\ 'stdin': 1,
+	\ }
+
+let g:neoformat_enabled_typescript = ['prettier']
 
 if filereadable(expand("~/.vimrc.local.bundles"))
   source ~/.vimrc.local.bundles
@@ -550,7 +579,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Neocomplete key-mappings.

@@ -1,15 +1,16 @@
 ##############################################################################
 # 00. General Env                                                            #
 ##############################################################################
-echo "  _   _          _   _                 _   _           _"
-echo " | | | |   ___  | | | |   ___         | \ | |   __ _  | |_    ___"
-echo " | |_| |  / _ \ | | | |  / _ \        |  \| |  / _  | | __|  / _ \ "
-echo " |  _  | |  __/ | | | | | (_) |  _    | |\  | | (_| | | |_  |  __/"
-echo " |_| |_|  \___| |_| |_|  \___/  ( )   |_| \_|  \__,_|  \__|  \___|"
-echo "                                |/"
-echo ""
+# TODO This is too spammy -- can it run only once?
+#echo "  _   _          _   _                 _   _           _"
+#echo " | | | |   ___  | | | |   ___         | \ | |   __ _  | |_    ___"
+#echo " | |_| |  / _ \ | | | |  / _ \        |  \| |  / _  | | __|  / _ \ "
+#echo " |  _  | |  __/ | | | | | (_) |  _    | |\  | | (_| | | |_  |  __/"
+#echo " |_| |_|  \___| |_| |_|  \___/  ( )   |_| \_|  \__,_|  \__|  \___|"
+#echo "                                |/"
+#echo ""
 
-### TODO:
+### TODO: I don't use any of these scripts.. remove
 ### Scripts - installed by env setup script
 SCRIPTS_PATH=/usr/local/bin/scripts
 mkdir -p $SCRIPTS_PATH
@@ -42,7 +43,6 @@ source ~/dotfiles/z/z.sh
 # Must press Ctrl+D twice before you exit shell
 export IGNOREEOF=1
 
-
 ### Python: Virtual Env
 
 # Support for bazaar (and virtualEnv?)
@@ -60,19 +60,9 @@ fi
 
 alias wo="workon"
 
-### Heroku Toolbelt
-
-export PATH="/usr/local/heroku/bin:$PATH"
-
 ### NodeJS
 # node package manager - have npm-installed binaries picked up
 export PATH=/usr/local/share/npm/bin:$PATH
-
-# node version manager
-if [ -f ~/nvm/nvm.sh ]; then
-  . ~/nvm/nvm.sh
-  [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
-fi
 
 
 ##############################################################################
@@ -117,7 +107,7 @@ alias gst='git status -uno' #tracked files only
 alias gss='git status -sb' # short status
 alias gd='git diff'
 alias gdw='git diff -w' #ignore whitespace
-alias gdp='gd HEAD^1' #diff currect state against previous commit
+alias gdp='gd HEAD~1' #diff currect state against previous commit
 alias ga='git add -p'
 alias gau='git add -u -p'
 alias gaa='git add -A -p'
@@ -159,77 +149,6 @@ alias v=vim
 # Time - print current unixtime
 alias unixtime='date +%s'
 
-# Daily tasks, timekeeping, ideas
-alias t="vim ~/Dropbox\ \(Personal\)/today.md ~/Dropbox\ \(Personal\)/dailylog.md ~/Dropbox\ \(Personal\)/ideas.md"
-
-##############################################################################
-# 03. Theme/Colors                                                           #
-##############################################################################
-
-# (Switched to zsh)
-
-##############################################################################
-# 04. Bash Auto-completion
-##############################################################################
-
-# TODO: Do other autocompletion scripts if zsh
-
-if [[ $SHELL == "/bin/bash" ]]; then
-
-  # Bash... itself
-  if [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-  fi
-
-  # Fabric
-  if [ -f ~/.fab-completion.bash ]; then
-    source ~/.fab-completion.bash
-  fi
-
-  # Pip (python package manager)
-  if [ -f ~/.pip-completion.bash ]; then
-    source ~/.pip-completion.bash
-  fi
-
-  # Heroku
-  if [ -f ~/.heroku-completion.bash ]; then
-    source ~/.heroku-completion.bash
-  fi
-
-  # Homebrew
-  if [[ -n `which brew` ]]; then
-    # Add Homebrew completions and homebrew sourced completions
-    source $(brew --repo)/Library/Contributions/brew_bash_completion.sh
-    for comp in \
-      $(brew --prefix)/etc/bash_completion \
-      $(brew --prefix)/etc/bash_completion.d/git-completion.bash
-    do
-      [[ -e $comp ]] && source $comp
-  done
-  fi
-
-  # Vagrant
-  if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
-    source `brew --prefix`/etc/bash_completion.d/vagrant
-  fi
-  complete -W "$(echo `vagrant --help | awk '/box/,/up/ {print $1}'`;)" vagrant
-
-  # Git
-  source ~/.git-completion.bash
-
-  # Autocomplete for 'g' as well
-  alias g='git'
-  complete -o default -o nospace -F _git g
-
-  ## Tab Completion - overall settings
-  set completion-ignore-case On
-
-  ### Experimental
-  # Coffee
-  complete -o default -o nospace -F coffee g # Autocomplete for coffee?? but for what?
-
-fi
-
 ##############################################################################
 # 05. Experimental (TBD if useful)
 ##############################################################################
@@ -243,6 +162,7 @@ fi
 # Checkout a remote branch and begin tracking it
 # git checkout -b test origin/test
 
+# TODO: Not used
 # Compress the cd, ls -l series of commands.
 alias lc="cl"
 function cl () {
@@ -253,12 +173,13 @@ function cl () {
    fi
 }
 
+# TODO: Not used
 # TODO: This belongs somewhere else, otherwise cant be invoked by sudo user
 allcrons(){
   for user in $(cut -f1 -d: /etc/passwd); do crontab -u $user -l; done
 }
 
-
+## TODO: Remove this? Or use go install brew
 ## Golang: Brew installed
 export GOPATH=$HOME/go
 #export GOROOT=/usr/local/opt/go/libexec
@@ -273,11 +194,7 @@ alias bash_analyze='cut -f1 -d" " .bash_history | sort | uniq -c | sort -nr | he
 alias lt="ls -AGlFTtr" # alias of ls that puts recently modified files at the bottom
 alias mod="lt | tail"
 
-alias bd="cd .."
-
 # shorter!
-#alias m="mv"
-alias c="cp"
 alias f="fg"
 alias xx="exit"
 
@@ -285,12 +202,13 @@ alias xx="exit"
 #alias grep='ag'
 
 # error running godoc directly due to path/env mumbo jumbo https://github.com/moovweb/gvm/issues/45
-alias godocumentation="$GOROOT/bin/godoc -http=:8080"
+#alias godocumentation="$GOROOT/bin/godoc -http=:8080"
 
 # Get UTC date
 alias utc="date -u"
 
 # TODO: How to pass creds even further, via mosh?
+# TODO: Necessary when not using Vagrant?
 # Reuse existing SSH auth, so credentials get passed correctly to tmux
 if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
@@ -298,18 +216,21 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
 
 # Connect to default tmux session
-alias st="tmux attach -t base || tmux new -s base"
+# TODO: Remove? This is handled by prezto
+#alias st="tmux attach -t base || tmux new -s base"
 
 # Home dir for Glide, go version manager
 # https://github.com/Masterminds/glide
 export GLIDE_HOME=~/.glide
 # Use Go1.5 vendoring
+# TODO: Not necessary with go1.6+?
 export GO15VENDOREXPERIMENT=1
 
-alias got="go test"
-alias gob="go build"
-alias m="make"
-alias mt="make test"
+# TODO: I don't use these
+#alias got="go test"
+#alias gob="go build"
+#alias m="make"
+#alias mt="make test"
 
 # if `hub` exists, add it as a Git alias
 if `which hub > /dev/null`; then
@@ -317,6 +238,29 @@ if `which hub > /dev/null`; then
 fi
 
 alias sz="source ~/.zshrc"
+
+alias c="hub clone -p"
+
+alias to_clipboard=pbcopy # handle ubuntu too
+alias gll="git log -1 --pretty=format:%H | tee /dev/tty | to_clipboard"
+
+# pretty json = pj
+alias pj='python -m json.tool'
+alias mt="make test"
+alias m="make"
+
+#function m() { make $@ 2>&1 | make2tap | tap-simple; }
+
+# android dev
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+alias cw="circle --watch"
+
+# TODO: Make a virtual env with same name as current directory
+
+# mve="mkvirtualenv $(basename $(pwd))"
 
 ##############################################################################
 # 06. Private Bash - may things in existing bash, too
