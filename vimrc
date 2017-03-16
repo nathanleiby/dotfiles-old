@@ -520,21 +520,6 @@ augroup END
 " for html files, 2 spaces
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
-
-" vim-javascript
-" augroup vimrc-javascript
-"   autocmd!
-"   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
-" augroup END
-
-autocmd FileType javascript set formatprg=prettier\ --stdin
-" autocmd BufWritePre *.js :normal gggqG
-autocmd FileType typescript set formatprg=prettier\ --stdin
-" autocmd BufWritePre *.ts :normal gggqG
-
-" lua
-
-
 " python
 " vim-python
 augroup vimrc-python
@@ -564,14 +549,6 @@ let g:airline#extensions#virtualenv#enabled = 1
 
 "*****************************************************************************
 "*****************************************************************************
-
-"" Include user's local vim config
-
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
-
-"" LOCAL CONF (temp)
 
 " start scrolling before you hit edge of window
 set scrolloff=3
