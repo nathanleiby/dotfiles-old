@@ -16,9 +16,6 @@ export VISUAL=nvim
 HISTFILESIZE=1000000000
 HISTSIZE=1000000
 
-# Z search: https://github.com/rupa/z
-source ~/dotfiles/z/z.sh
-
 # Must press Ctrl+D twice before you exit shell
 export IGNOREEOF=1
 
