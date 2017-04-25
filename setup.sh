@@ -5,9 +5,10 @@
 ############################
 
 brew install z
-cbrew install tmux
+brew install tmux
 brew install reattach-to-user-namespace
 brew install hub
 brew install ag
+brew install diff-so-fancy
 
 ./makesymlinks.sh
