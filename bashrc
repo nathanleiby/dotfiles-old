@@ -185,3 +185,21 @@ alias cw="circle --watch"
 
 # TODO: Make a virtual env with same name as current directory
 alias mve='mkvirtualenv $(basename $(pwd))'
+
+# Add code dirs to CDPATH
+export CDPATH=.:~:~/go/src/github.com/Clever:~/go/src/github.com/nathanleiby
+
+# Make aliases
+alias m='make'
+alias mb='make build'
+alias mt='make test'
+alias mr='make run'
+
+# watch + pretty-print go test output
+#
+# requires:
+# - unbuffer (https://apple.stackexchange.com/questions/193138/to-install-unbuffer-in-osx)
+# - richgo (https://github.com/kyoh86/richgo)
+alias watch_go_test="watch --color unbuffer richgo test"
+
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
