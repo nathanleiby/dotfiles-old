@@ -55,7 +55,7 @@ fi
 
 ### Bash / ZSH Profile
 alias bp="$EDITOR ~/.bashrc ~/.bash_profile_private ~/.bash_profile"
-alias sbp="source ~/.bashrc"
+alias sbp="source ~/.bash_profile"
 alias sz="source ~/.zshrc"
 
 ### Python (PIP)
@@ -141,6 +141,8 @@ alias c="hub clone -p"
 # gll = "git last log" -- print last commit sha, and copy it to clipboard
 alias to_clipboard=pbcopy # handle ubuntu too
 alias gll="git log -1 --pretty=format:%H | tee /dev/tty | to_clipboard"
+# gcb = "git current branch"
+alias gcb="git rev-parse --abbrev-ref HEAD | tee /dev/tty | to_clipboard"
 
 ############################################################################
 # 03. Private Bash - may things in existing bash, too

@@ -69,7 +69,7 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 " html
 "" HTML Bundle
-Plug 'amirh/HTML-AutoCloseTag'
+" Plug 'amirh/HTML-AutoCloseTag'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
@@ -79,9 +79,8 @@ Plug 'mattn/emmet-vim'
 " javascript
 "" Javascript Bundle
 " Plug 'jelera/vim-javascript-syntax'
-" Plug 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 
-" lua
 "" Lua Bundle
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-lua-inspect'
@@ -91,13 +90,15 @@ let g:lua_inspect_events = '' " disable by default
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
 
+" fzf - fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 "*****************************************************************************
 "*****************************************************************************
 
 "" Include user's extra bundle
 Plug 'saltstack/salt-vim'
-" Plug 'shougo/neocomplete.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " NeoVim
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'christoomey/vim-tmux-navigator'
@@ -394,24 +395,24 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" ctrlp.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 1
+" set wildmode=list:longest,list:full
+" set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+" let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+" let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
+" let g:ctrlp_use_caching = 1
 
-" The Silver Searcher
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
+" " The Silver Searcher
+" if executable('ag')
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"   let g:ctrlp_use_caching = 0
+" endif
 
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-noremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_map = '<leader>e'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+" noremap <leader>b :CtrlPBuffer<CR>
+" let g:ctrlp_map = '<leader>e'
+" let g:ctrlp_open_new_file = 'r'
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -443,7 +444,9 @@ if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endif
 
+" Yank to clipboard
 noremap YY "+y<CR>
+" Paste from clipboard
 noremap <leader>p "+gP<CR>
 noremap XX "+x<CR>
 
@@ -454,22 +457,26 @@ if has('macunix')
 endif
 
 "" Buffer nav
-noremap <leader>z :bp<CR>
 noremap <leader>q :bp<CR>
-noremap <leader>x :bn<CR>
 noremap <leader>w :bn<CR>
 
 "" Close buffer
+noremap <leader>x :bd<CR>
 noremap <leader>c :bd<CR>
 
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
 "" Switching windows
-"noremap <C-j> <C-w>j
-"noremap <C-k> <C-w>k
-"noremap <C-l> <C-w>l
-"noremap <C-h> <C-w>h
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-l> <C-w>l
+" noremap <C-h> <C-w>h
+
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
@@ -481,6 +488,7 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
+
 
 "*****************************************************************************
 "" Custom configs
@@ -546,6 +554,15 @@ let g:syntastic_python_checkers=['python', 'flake8']
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
 
+"" Run FZF fuzzy finder
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+noremap <leader>e :ProjectFiles<CR>
+
+command! JSONFormat execute ':%!python -m json.tool'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -557,22 +574,11 @@ set scrolloff=3
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" Use neocomplete.
-" let g:neocomplete#enable_at_startup = 0
-" Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" Neocomplete key-mappings.
-" <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-"     return neocomplete#close_popup() . "\<CR>"
-" endfunction
-" <TAB>: completion.0
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Simpler movement in Vim Splits
 " e.g. Instead of ctrl-w then j, it’s just ctrl-j:
-nnoremap <C-J> <C-W><C-J>
+noremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
@@ -582,6 +588,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
+let g:airline_powerline_fonts = 1
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -640,10 +647,13 @@ let g:gist_post_private = 1 " Post gists privately by default
 " http://www.bestofvim.com/tip/auto-reload-your-vimrc/
 augroup reload_vimrc " {
     autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+    autocmd! bufwritepost '~/.vimrc' source %
 augroup END " }
 
 " Typescript
 " autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
+
+" Golang
+vmap <Leader>gi GoImports
 
 let g:deoplete#enable_at_startup = 1
