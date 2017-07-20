@@ -104,13 +104,18 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mattn/webapi-vim' " Required for mattn/gist-vim
 Plug 'mattn/gist-vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'hashivim/vim-terraform'
 Plug 'cespare/vim-toml'
 Plug 'sbdchd/neoformat'
 Plug 'stephpy/vim-yaml'
+
+" Typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'mhartington/nvim-typescript'
 
 " Configuration for 'prettier' auto-formatting for Javascript
 let g:neoformat_javascript_prettier = {
@@ -164,9 +169,9 @@ set ttyfast
 set backspace=indent,eol,start
 
 "" Tabs. May be overriten by autocmd rules
-set tabstop=4
+set tabstop=2
 set softtabstop=0
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 
 "" Map leader to ,
@@ -466,17 +471,6 @@ noremap <leader>c :bd<CR>
 
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
-
-"" Switching windows
-" noremap <C-j> <C-w>j
-" noremap <C-k> <C-w>k
-" noremap <C-l> <C-w>l
-" noremap <C-h> <C-w>h
-
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
