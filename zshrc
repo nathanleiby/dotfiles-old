@@ -6,7 +6,7 @@ fi
 # Include bash_profile (which includes bashrc)
 source ~/.bash_profile
 
-export NVM_DIR="/Users/nathanleiby/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
