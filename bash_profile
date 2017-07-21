@@ -1,5 +1,2 @@
-# Call ~/.bashrc from ~/.bash_profile, to keep all setup in one place
-# Normally, bash_profile is only loaded on login
-if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
-fi
+if [ -f ~/.clever_bash ]; then source ~/.clever_bash; else echo "ERROR: Could not find ~/.clever_bash"; fi
+if [ -f ~/.bashrc ]; then source ~/.bashrc; else echo "ERROR: Could not find ~/.bashrc"; fi
