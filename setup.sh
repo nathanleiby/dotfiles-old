@@ -5,6 +5,7 @@
 ############################
 
 brew install tmux
+brew install reattach-to-user-namespace # for tmux copy-paste on OSX
 brew install hub
 brew install ag
 brew install diff-so-fancy

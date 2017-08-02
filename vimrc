@@ -445,9 +445,7 @@ if has('autocmd')
 endif
 
 "" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+set clipboard=unnamed
 
 " Yank to clipboard
 noremap YY "+y<CR>
