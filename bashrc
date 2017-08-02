@@ -203,5 +203,6 @@ alias mr='make run'
 # - unbuffer (https://apple.stackexchange.com/questions/193138/to-install-unbuffer-in-osx)
 # - richgo (https://github.com/kyoh86/richgo)
 alias watch_go_test="watch --color unbuffer richgo test"
+alias got=watch_go_test
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
