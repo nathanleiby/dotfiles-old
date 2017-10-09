@@ -113,7 +113,7 @@ alias gpp='git pull && git push'
 alias gp='git pull'
 alias gr='git reset'
 alias groll='git checkout HEAD~1' #rollback 1 commit
-
+alias grom='git fetch && git stash && git rebase origin/master && git stash pop'
 alias gcob="git checkout -b"
 alias gpf="git push --force"
 
@@ -202,7 +202,13 @@ alias mr='make run'
 # requires:
 # - unbuffer (https://apple.stackexchange.com/questions/193138/to-install-unbuffer-in-osx)
 # - richgo (https://github.com/kyoh86/richgo)
-alias watch_go_test="watch --color unbuffer richgo test"
+watch_go_test() {
+  if [ -z "$1" ]; then
+    watch --color unbuffer richgo test
+  else
+    watch --color unbuffer richgo test -run $1
+  fi
+}
 alias got=watch_go_test
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
