@@ -39,7 +39,7 @@ Plug 'mattn/gist-vim'
 " show git changes
 Plug 'airblade/vim-gitgutter'
 
-""** DEACTIVATED **
+""** TODO: DEACTIVATED **
 "Plug 'mxw/vim-jsx'
 "Plug 'hashivim/vim-terraform'
 "Plug 'cespare/vim-toml'
@@ -105,32 +105,6 @@ set number
 let no_buffers_menu=1
 colorscheme molokai
 
-"set mousemodel=popup
-"set t_Co=256
-"set guioptions=egmrti
-"set gfn=Monospace\ 10
-
-"if has("gui_running")
-"  if has("gui_mac") || has("gui_macvim")
-"    set guifont=Menlo:h12
-"    set transparency=7
-"  endif
-"else
-"  let g:CSApprox_loaded = 1
-
-"  " IndentLine
-"  let g:indentLine_enabled = 1
-"  let g:indentLine_concealcursor = 0
-"  let g:indentLine_char = '┆'
-"  let g:indentLine_faster = 1
-
-
-"set term=xterm-256color
-"if $COLORTERM == 'gnome-terminal'
-"  set term=gnome-256color
-"endif
-
-
 """ Status bar
 "set laststatus=2
 
@@ -138,16 +112,7 @@ colorscheme molokai
 "set modeline
 "set modelines=10
 
-"set title
-"set titleold="Terminal"
-"set titlestring=%F
-
-"if exists("*fugitive#statusline")
-"  set statusline+=%{fugitive#statusline()}
-"endif
-
 "" vim-airline
-"let g:airline_theme = 'powerlineish'
 let g:airline#extensions#syntastic#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -169,20 +134,34 @@ let g:airline_skip_empty_sections = 1
 "  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 "augroup END
 
-""" txt
-"augroup vimrc-wrapping
-"  autocmd!
-"  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
-"augroup END
+"" make/cmake
+augroup vimrc-make-cmake
+  autocmd!
+  autocmd FileType make setlocal noexpandtab
+  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+augroup END
 
-""" make/cmake
-"augroup vimrc-make-cmake
-"  autocmd!
-"  autocmd FileType make setlocal noexpandtab
-"  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-"augroup END
+" Automatically strip whitespace at EOL
+autocmd BufWritePre * :%s/\s\+$//e
 
-"set autoread
+"" Prettify Vagrantfile
+"autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
+
+
+"
+"" autoreload vimrc on save - useful for validating changes in vimrc
+"" http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+"augroup reload_vimrc " {
+"    autocmd!
+"    autocmd! bufwritepost '~/.vimrc' source %
+"augroup END " }
+
+"" Typescript
+"" autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
+
+
+" Automatically re-read file in vim if it has been edited outside of Vim
+set autoread
 
 ""*****************************************************************************
 """ Mappings
@@ -312,31 +291,12 @@ nnoremap <C-H> <C-W><C-H>
 
 
 
-"" In Makefiles DO NOT use spaces instead of tabs
-"autocmd FileType make setlocal noexpandtab
-
-"" Automatically strip whitespace at EOL
-"autocmd BufWritePre * :%s/\s\+$//e
-
-"" Prettify Vagrantfile
-"autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-
 """ Find-and-replace shortcut
 "" TODO: How to escape the highlighted region correctly?
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 "" Gist-Vim
 let g:gist_post_private = 1 " Post gists privately by default
-"
-"" autoreload vimrc on save - useful for validating changes in vimrc
-"" http://www.bestofvim.com/tip/auto-reload-your-vimrc/
-"augroup reload_vimrc " {
-"    autocmd!
-"    autocmd! bufwritepost '~/.vimrc' source %
-"augroup END " }
-
-"" Typescript
-"" autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
 
 "" Enable Deoplete (autocompletion)
 let g:deoplete#enable_at_startup = 1
