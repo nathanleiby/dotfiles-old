@@ -9,8 +9,8 @@ export HOMEBREW_NO_EMOJI='1'
 export HOMEBREW_DEVELOPER='1'
 
 ### Editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=/usr/local/bin/nvim
+export VISUAL=$EDITOR
 
 ### Bash History
 HISTFILESIZE=1000000000
