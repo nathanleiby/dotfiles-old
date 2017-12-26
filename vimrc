@@ -1,5 +1,5 @@
 "*****************************************************************************
-"" Plugins 
+"" Plugins
 "*****************************************************************************
 
 " Required:
@@ -8,7 +8,7 @@ call plug#begin(expand('~/.vim/plugged'))
 " ctrl-p file search
 Plug 'ctrlpvim/ctrlp.vim'
 
-" Airline 
+" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -39,6 +39,15 @@ Plug 'mattn/gist-vim'
 " show git changes
 Plug 'airblade/vim-gitgutter'
 
+Plug 'mhartington/nvim-typescript'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ianks/vim-tsx'
+
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
 ""** TODO: DEACTIVATED **
 "Plug 'mxw/vim-jsx'
 "Plug 'hashivim/vim-terraform'
@@ -176,7 +185,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_map = '<leader>e'
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-noremap <leader>b :CtrlPBuffer<CR> 
+noremap <leader>b :CtrlPBuffer<CR>
 
 "" Disable visualbell
 set noerrorbells visualbell t_vb=
@@ -254,7 +263,7 @@ augroup FileType go
 "  au FileType go nmap <leader>gt <Plug>(go-test)
 augroup END
 let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1 
+let g:go_auto_type_info = 1
 set updatetime=100
 
 "" vim-airline
