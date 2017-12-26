@@ -182,9 +182,6 @@ export ANDROID_HOME=~/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
-# cw = watch CircleCI build output
-alias cw="circle --watch"
-
 # TODO: Make a virtual env with same name as current directory
 alias mve='mkvirtualenv $(basename $(pwd))'
 
@@ -204,11 +201,23 @@ alias mr='make run'
 # - richgo (https://github.com/kyoh86/richgo)
 watch_go_test() {
   if [ -z "$1" ]; then
-    watch --color unbuffer richgo test
+    reflex -r '\.go$' -- richgo test
   else
-    watch --color unbuffer richgo test -run $1
+    reflex -r '\.go$' -- richgo test -run $1
   fi
 }
 alias got=watch_go_test
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+update_prezto() {
+  cd $ZPREZTODIR
+  git pull
+  git submodule update --init --recursive
+}
+
+alias cw="watch -c unbuffer circleci-cli show"
+
+# https://routley.io/tech/2017/11/23/logbook.html
+function lb() {
+  $EDITOR ~/Dropbox/logbook/$(date '+%Y-%m-%d').md
+}
