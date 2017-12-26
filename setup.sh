@@ -10,6 +10,7 @@ brew install hub
 brew install ag
 brew install diff-so-fancy
 brew install fzf
+brew install tree
 
 # Needed for neovim completion via deoplete
 pip3 install --upgrade neovim
