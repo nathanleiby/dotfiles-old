@@ -193,6 +193,7 @@ alias m='make'
 alias mb='make build'
 alias mt='make test'
 alias mr='make run'
+alias mg='make generate'
 
 # watch + pretty-print go test output
 #
