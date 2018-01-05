@@ -201,11 +201,7 @@ alias mg='make generate'
 # - unbuffer (https://apple.stackexchange.com/questions/193138/to-install-unbuffer-in-osx)
 # - richgo (https://github.com/kyoh86/richgo)
 watch_go_test() {
-  if [ -z "$1" ]; then
-    reflex -r '\.go$' -- richgo test
-  else
-    reflex -r '\.go$' -- richgo test -run $1
-  fi
+  reflex -r '\.go$' -- richgo test $@
 }
 alias got=watch_go_test
 
