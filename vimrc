@@ -48,6 +48,11 @@ Plug 'ianks/vim-tsx'
 
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
+
+" Comments
+" <leader>c<space> |NERDComToggleComment|
+Plug 'scrooloose/nerdcommenter'
+
 ""** TODO: DEACTIVATED **
 "Plug 'mxw/vim-jsx'
 "Plug 'hashivim/vim-terraform'
@@ -55,10 +60,11 @@ Plug 'iamcco/markdown-preview.vim'
 "Plug 'stephpy/vim-yaml'
 
 "" Typescript
-"Plug 'leafgarland/typescript-vim'
-"Plug 'HerringtonDarkholme/yats.vim'
-"Plug 'Quramy/tsuquyomi'
-"Plug 'mhartington/nvim-typescript'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'mhartington/nvim-typescript'
 
 call plug#end()
 
@@ -85,7 +91,7 @@ set shiftwidth=2
 set expandtab
 
 "" Map leader to ,
-let mapleader=','
+let mapleader=" "
 
 """ Enable hidden buffers
 "set hidden
@@ -102,7 +108,8 @@ set noswapfile
 
 "set fileformats=unix,dos,mac
 "set showcmd
-"set shell=/bin/zsh
+set shell=/bin/zsh
+"set shell=bash\ -i
 
 "*****************************************************************************
 "" Visual Settings
