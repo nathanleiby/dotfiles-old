@@ -30,3 +30,9 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# kakrc
+mkdir -p ~/.config/kak
+mkdir -p $olddir/kak
+mv ~/.config/kak/kakrc $olddir/kak/
+ln -s $dir/kakrc ~/.config/kak/kakrc
