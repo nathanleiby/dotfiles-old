@@ -194,11 +194,12 @@ alias mb='make build'
 alias mt='make test'
 alias mr='make run'
 alias mg='make generate'
+alias md='make install_deps || make deps'
 
 # watch + pretty-print go test output
 #
 # requires:
-# - unbuffer (https://apple.stackexchange.com/questions/193138/to-install-unbuffer-in-osx)
+# - reflex (github.com/cespare/reflex)
 # - richgo (https://github.com/kyoh86/richgo)
 watch_go_test() {
   reflex -r '\.go$' -- richgo test $@
@@ -218,3 +219,22 @@ alias cw="watch -c unbuffer circleci-cli show"
 function lb() {
   $EDITOR ~/Dropbox/logbook/$(date '+%Y-%m-%d').md
 }
+
+# Use Go 1.10 beta
+alias go="go1.10beta2"
+
+# Docker build "local"
+docker_build_local() {
+  tag=local/`basename $(pwd)`
+  echo "Building docker image '$tag'..."
+  docker build -t $tag .
+}
+alias dbl=docker_build_local
+
+# Tree is a good way to view file structure
+# let's ignore annoying vendor dirs
+alias tt="tree -I 'node_modules|vendor'"
+# directories only
+alias ttd="tree -d -I 'node_modules|vendor'"
+#KAKOUNE="kak -c default 2>/dev/null || kak -s default"
+alias k=kak
