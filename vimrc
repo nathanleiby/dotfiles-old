@@ -26,8 +26,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'saltstack/salt-vim'
 
 " Completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " NeoVim
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " NeoVim
+Plug 'Shougo/deoplete.nvim', { 'commit': '17bc40583b24c2df7df798af2b205675acee247d', 'do': ':UpdateRemotePlugins' } " NeoVim
+Plug 'zchee/deoplete-go', { 'commit': '513ae17f1bd33954da80059a21c128a315726a81', 'do': 'make' } 
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
