@@ -206,6 +206,9 @@ watch_go_test() {
 }
 alias got=watch_go_test
 
+# Disable Ctrl+S, Ctrl+Q
+stty -ixon
+
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 update_prezto() {
   cd $ZPREZTODIR
