@@ -11,6 +11,7 @@ brew install ag
 brew install diff-so-fancy
 brew install fzf
 brew install tree
+brew install gnu-sed --with-default-names
 
 # Needed for neovim completion via deoplete
 pip3 install --upgrade neovim
