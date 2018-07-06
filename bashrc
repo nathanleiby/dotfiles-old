@@ -39,10 +39,6 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
-# Home dir for Glide, go version manager
-# https://github.com/Masterminds/glide
-export GLIDE_HOME=~/.glide
-
 ### Git
 # if `hub` exists, add it as a Git alias
 if `which hub > /dev/null`; then
@@ -141,6 +137,7 @@ alias c="hub clone -p"
 # gll = "git last log" -- print last commit sha, and copy it to clipboard
 alias to_clipboard=pbcopy # handle ubuntu too
 alias gll="git log -1 --pretty=format:%H | tee /dev/tty | to_clipboard"
+alias glls="git log -1 --pretty=format:%H | cut -c 1-7 | tee /dev/tty | to_clipboard"
 # gcb = "git current branch"
 alias gcb="git rev-parse --abbrev-ref HEAD | tee /dev/tty | to_clipboard"
 
@@ -195,6 +192,7 @@ alias mt='make test'
 alias mr='make run'
 alias mg='make generate'
 alias md='make install_deps || make deps'
+alias mm='make mocks'
 
 # watch + pretty-print go test output
 #
@@ -202,12 +200,17 @@ alias md='make install_deps || make deps'
 # - reflex (github.com/cespare/reflex)
 # - richgo (https://github.com/kyoh86/richgo)
 watch_go_test() {
-  reflex -r '\.go$' -- richgo test $@
+  reflex -r '\.go$' -R vendor/ -- richgo test $@
 }
 alias got=watch_go_test
 
 # Disable Ctrl+S, Ctrl+Q
 stty -ixon
+
+#watch_node_test() {
+  #reflex -r '\.ts$' -R node_modules -- make
+#}
+#alias wnt=watch_node_test
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 update_prezto() {
@@ -222,9 +225,6 @@ alias cw="watch -c unbuffer circleci-cli show"
 function lb() {
   $EDITOR ~/Dropbox/logbook/$(date '+%Y-%m-%d').md
 }
-
-# Use Go 1.10 beta
-alias go="go1.10beta2"
 
 # Docker build "local"
 docker_build_local() {

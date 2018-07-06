@@ -28,7 +28,8 @@ Plug 'saltstack/salt-vim'
 " Completion
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " NeoVim
 Plug 'Shougo/deoplete.nvim', { 'commit': '17bc40583b24c2df7df798af2b205675acee247d', 'do': ':UpdateRemotePlugins' } " NeoVim
-Plug 'zchee/deoplete-go', { 'commit': '513ae17f1bd33954da80059a21c128a315726a81', 'do': 'make' } 
+"Plug 'zchee/deoplete-go', { 'commit': '513ae17f1bd33954da80059a21c128a315726a81', 'do': 'make' }
+Plug 'zchee/deoplete-go', { 'commit': '977fb75b38b82528d179f1029d1852900332dedc', 'do': 'make'}
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -38,12 +39,11 @@ Plug 'mattn/webapi-vim' " Required for mattn/gist-vim
 Plug 'mattn/gist-vim'
 
 " show git changes
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', { 'commit': '932ffaca092cca246b82c33e23d2d3a05e192e08' }
 
-Plug 'mhartington/nvim-typescript'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+"Plug 'prettier/vim-prettier', {
+  "\ 'do': 'yarn install',
+  "\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ianks/vim-tsx'
 
@@ -55,18 +55,27 @@ Plug 'iamcco/markdown-preview.vim'
 Plug 'scrooloose/nerdcommenter'
 
 ""** TODO: DEACTIVATED **
-"Plug 'mxw/vim-jsx'
-"Plug 'hashivim/vim-terraform'
-"Plug 'cespare/vim-toml'
-"Plug 'stephpy/vim-yaml'
+Plug 'mxw/vim-jsx'
 
 "" Typescript
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'Quramy/tsuquyomi'
+"Plug 'Quramy/tsuquyomi'
+"Plug 'mhartington/nvim-typescript', { 'commit': '70e36b80113c2d84663b0f86885320022943dd51'}
 Plug 'mhartington/nvim-typescript'
+Plug 'Quramy/vim-js-pretty-template'
 
+
+"" Git
+Plug 'tpope/vim-fugitive'
+
+"" Experimental...
+" Formatting
+Plug 'sbdchd/neoformat'
+
+Plug 'ruanyl/vim-gh-line'
+"
 call plug#end()
 
 "*****************************************************************************
@@ -94,8 +103,9 @@ set expandtab
 "" Map leader to ,
 let mapleader=" "
 
-""" Enable hidden buffers
-"set hidden
+"" Enable hidden buffers
+"" use case: go to new buffer without saving old buffer
+set hidden
 
 """ Searching
 set hlsearch
@@ -159,11 +169,10 @@ augroup vimrc-make-cmake
 augroup END
 
 " Automatically strip whitespace at EOL
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 "" Prettify Vagrantfile
 "autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-
 
 "
 "" autoreload vimrc on save - useful for validating changes in vimrc
@@ -174,11 +183,29 @@ autocmd BufWritePre * :%s/\s\+$//e
 "augroup END " }
 
 "" Typescript
-"" autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
+autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
 
+" YML
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 
-" Automatically re-read file in vim if it has been edited outside of Vim
+autocmd Filetype jsx setlocal ts=2 sts=2 sw=2
+
+" treat .policy files (AWS Policies) as JSON
+au BufReadPost *.policy set syntax=json
+
+" Run go_metalinter on save
+"let g:go_auto_type_info = 1
+"let g:go_metalinter_enabled = 1
+"let g:go_metalinter_autosave = 1
+"let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+
+" Automatically re-read file in vim if it has been edited
 set autoread
+au CursorHold * checktime
+
+" Cleanup whitespace on save
+"autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 ""*****************************************************************************
 """ Mappings
@@ -266,12 +293,12 @@ augroup FileType go
 
 "  au FileType go nmap <Leader>gi <Plug>(go-info)
 
-"  au FileType go nmap <leader>gr <Plug>(go-run)
-"  au FileType go nmap <leader>rb <Plug>(go-build)
-"  au FileType go nmap <leader>gt <Plug>(go-test)
+  "au FileType go nmap <leader>gr <Plug>(go-run)
+  au FileType go nmap <leader>rb <Plug>(go-build)
+  au FileType go nmap <leader>gt <Plug>(go-test)
 augroup END
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
+"let g:go_fmt_command = "goimports"
+"let g:go_auto_type_info = 1
 set updatetime=100
 
 "" vim-airline
@@ -317,3 +344,16 @@ let g:gist_post_private = 1 " Post gists privately by default
 
 "" Enable Deoplete (autocompletion)
 let g:deoplete#enable_at_startup = 1
+
+"" Neoformat on save.
+"" https://github.com/sbdchd/neoformat#managing-undo-history
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
+
+au! BufRead,BufNewFile *.policy setfiletype json
+
+"" Abbreviated commands
+""" Golang
+cabbrev gb GoBuild
