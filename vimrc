@@ -26,9 +26,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'saltstack/salt-vim'
 
 " Completion
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " NeoVim
 Plug 'Shougo/deoplete.nvim', { 'commit': '17bc40583b24c2df7df798af2b205675acee247d', 'do': ':UpdateRemotePlugins' } " NeoVim
-"Plug 'zchee/deoplete-go', { 'commit': '513ae17f1bd33954da80059a21c128a315726a81', 'do': 'make' }
 Plug 'zchee/deoplete-go', { 'commit': '977fb75b38b82528d179f1029d1852900332dedc', 'do': 'make'}
 
 " tmux
@@ -41,11 +39,6 @@ Plug 'mattn/gist-vim'
 " show git changes
 Plug 'airblade/vim-gitgutter', { 'commit': '932ffaca092cca246b82c33e23d2d3a05e192e08' }
 
-"Plug 'prettier/vim-prettier', {
-  "\ 'do': 'yarn install',
-  "\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'ianks/vim-tsx'
 
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
@@ -54,28 +47,36 @@ Plug 'iamcco/markdown-preview.vim'
 " <leader>c<space> |NERDComToggleComment|
 Plug 'scrooloose/nerdcommenter'
 
-""** TODO: DEACTIVATED **
-Plug 'mxw/vim-jsx'
 
 "" Typescript
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'w0rp/ale'
+Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins', 'for': ['typescript', 'typescript.tsx']}
+Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
+Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
+
+"Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'mhartington/nvim-typescript'
+"Plug 'ianks/vim-tsx'
+
+"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 "Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
 "Plug 'Quramy/tsuquyomi'
 "Plug 'mhartington/nvim-typescript', { 'commit': '70e36b80113c2d84663b0f86885320022943dd51'}
-Plug 'mhartington/nvim-typescript'
-Plug 'Quramy/vim-js-pretty-template'
+"Plug 'Quramy/vim-js-pretty-template'
 
 
 "" Git
 Plug 'tpope/vim-fugitive'
+"" Open to line in Github
+Plug 'ruanyl/vim-gh-line'
 
 "" Experimental...
 " Formatting
 Plug 'sbdchd/neoformat'
 
-Plug 'ruanyl/vim-gh-line'
-"
+" Highlighting
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 
 "*****************************************************************************
@@ -188,7 +189,7 @@ autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
 " YML
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 
-autocmd Filetype jsx setlocal ts=2 sts=2 sw=2
+"autocmd Filetype jsx setlocal ts=2 sts=2 sw=2
 
 " treat .policy files (AWS Policies) as JSON
 au BufReadPost *.policy set syntax=json
@@ -342,8 +343,6 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 "" Gist-Vim
 let g:gist_post_private = 1 " Post gists privately by default
 
-"" Enable Deoplete (autocompletion)
-let g:deoplete#enable_at_startup = 1
 
 "" Neoformat on save.
 "" https://github.com/sbdchd/neoformat#managing-undo-history
@@ -357,3 +356,16 @@ au! BufRead,BufNewFile *.policy setfiletype json
 "" Abbreviated commands
 """ Golang
 cabbrev gb GoBuild
+cabbrev gml GoMetaLinter
+
+
+"" EXPERIMENTAL (START)
+"let g:go_metalinter_autosave = 1
+"let g:go_metalinter_autosave_enabled = ['vet']
+"" TODO: only in typescript files...
+
+" cabbrev gd TSDef
+"" EXPERIMENTAL (END)
+
+"" Enable Deoplete (autocompletion)
+let g:deoplete#enable_at_startup = 1
