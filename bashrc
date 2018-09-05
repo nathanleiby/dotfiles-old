@@ -54,15 +54,6 @@ alias bp="$EDITOR ~/.bashrc ~/.bash_profile_private ~/.bash_profile"
 alias sbp="source ~/.bash_profile"
 alias sz="source ~/.zshrc"
 
-### Python (PIP)
-pipInstallAll() {
-  for req in `ls requirements*.txt`; do
-    pip install -r $req;
-  done
-}
-alias pip_install_all=pipInstallAll
-alias pip_uninstall_all="pip freeze | xargs pip uninstall -y"
-
 # VirtualEnv
 alias wo="workon"
 
@@ -81,8 +72,9 @@ alias la='ls -FGa'
 alias ll='ls -FGal'
 
 # Short by time (reverse)
-alias lst='ls -ltr'
+alias lst="ls -AGlFTtr" # alias of ls that puts recently modified files at the bottom
 alias lt='lst'
+alias mod="lt | tail"
 
 ### Git
 # TODO: Add these to gitconfig instead
@@ -160,27 +152,14 @@ fi
 
 ## TODO: Remove this? Or use go install brew
 alias bash_analyze='cut -f1 -d" " .bash_history | sort | uniq -c | sort -nr | head -n 30'
-alias lt="ls -AGlFTtr" # alias of ls that puts recently modified files at the bottom
-alias mod="lt | tail"
 
 
 # TODO: Necessary when not using Vagrant?
 # Reuse existing SSH auth, so credentials get passed correctly to tmux
-if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
-  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
-fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
-
-## TODO: Try
-#function m() { make $@ 2>&1 | make2tap | tap-simple; }
-
-# android dev
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-
-# TODO: Make a virtual env with same name as current directory
-alias mve='mkvirtualenv $(basename $(pwd))'
+#if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+  #ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+#fi
+#export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
 
 # Add code dirs to CDPATH
 export CDPATH=.:~:~/go/src/github.com/Clever:~/go/src/github.com/nathanleiby
@@ -239,5 +218,6 @@ alias dbl=docker_build_local
 alias tt="tree -I 'node_modules|vendor'"
 # directories only
 alias ttd="tree -d -I 'node_modules|vendor'"
-#KAKOUNE="kak -c default 2>/dev/null || kak -s default"
-alias k=kak
+
+alias gh=git browse
+alias github=git browse
