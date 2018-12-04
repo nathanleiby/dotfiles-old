@@ -34,3 +34,12 @@ alias global fb fzf-buffer
 
 # Use as ctrl-p
 map global normal <c-p> :ff<ret>
+
+# Python formatcmd
+hook global WinSetOption filetype=python %{
+  set window formatcmd 'black -'
+}
+
+# indent via tab and shift-tab
+# map global insert <tab> '<a-;><gt>'
+# map global insert <s-tab> '<a-;><lt>'
