@@ -5,6 +5,10 @@ Installing Dotfiles...
 
 ## Dev Env Setup
 
+ZSH + Prezto
+
+- https://github.com/sorin-ionescu/prezto
+
 NeoVim
 
 - Install NeoVim: https://github.com/neovim/neovim/wiki/Installing-Neovim
@@ -20,7 +24,7 @@ iTerm2
     - http://aralbalkan.com/scribbles/open-iterm-tab-in-same-directory/
 - Disable "Use Lion-style Fullscreen" in General preferences
 
-Alfred - launch
+Alfred - launcher
 
 Dropbox
 
@@ -32,21 +36,11 @@ Install [xcode command line tools](http://stackoverflow.com/questions/19066647/x
 xcode-select --install
 ```
 
-Xcode sometimes gets confused (Says "not available" when you attempt to install), but this is a sign that you may already have GUI app installed? In any case, may need this [`switch` workaround](http://stackoverflow.com/questions/9477860/xcode-select-switch-path-when-using-cli-toolkit).
-
 ## Tools
 
-- Hub - https://github.com/github/hub
-- AG - https://github.com/ggreer/the_silver_searcher
+- Spectacle (free) - Shortcuts for window snapping
 
 ## OSX Setup
 
-Lots of great options to configure (OSX 10.11 El Capitan): https://gist.github.com/saetia/1623487
-
-Key repeat as fast as possible - https://github.com/mathiasbynens/dotfiles/issues/687
-
-remap capslock to CTRL -- update Keyboard settings in OSX
-
-[BetterSnapTool](https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12) - Shortcuts for window snapping - paid. $3 for window snapping
-
-[Karabiner Elements](https://github.com/tekezo/Karabiner-Elements) - Remap capslock to be escape
+- OSX Keyboard Settings - Remap capslock to be escape
+- Key repeat as fast as possible - https://github.com/mathiasbynens/dotfiles/issues/687
