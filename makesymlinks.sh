@@ -33,6 +33,6 @@ done
 
 # kakrc
 mkdir -p ~/.config/kak
-mkdir -p $olddir/kak
-mv ~/.config/kak/kakrc $olddir/kak/
-ln -s $dir/kakrc ~/.config/kak/kakrc
+mkdir -p $olddir/config
+mv ~/.config/kak $olddir/config/kak
+ln -s $dir/config/kak ~/.config/kak
