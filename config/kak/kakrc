@@ -29,17 +29,36 @@ def -docstring 'invoke fzf to select a buffer' \
 } }
 
 # Aliases for fzf
+# TODO: Seeing 1:1: 'ff' no such command: '' .. sup?
 alias global ff fzf-file
 alias global fb fzf-buffer
 
 # Use as ctrl-p
 map global normal <c-p> :ff<ret>
 
+# clipboard (MacOS)
+# https://github.com/mawww/kakoune/wiki/Registers---Clipboard
+hook global NormalKey y|d|c %{ nop %sh{
+  printf %s "$kak_main_reg_dquote" | pbcopy
+}}
+
+## Formatting
 # Python formatcmd
 hook global WinSetOption filetype=python %{
   set window formatcmd 'black -'
 }
 
+# Javascript formatcmd
+hook global WinSetOption filetype=javascript %{
+  set window formatcmd 'prettier -'
+}
+
+add-highlighter global/ number-lines
 # indent via tab and shift-tab
 # map global insert <tab> '<a-;><gt>'
 # map global insert <s-tab> '<a-;><lt>'
+#
+# TODO: change colorscheme?
+#colorscheme solarized-dark
+#colorscheme gruvbox
+colorscheme base16
