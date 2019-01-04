@@ -43,4 +43,5 @@ xcode-select --install
 ## OSX Setup
 
 - OSX Keyboard Settings - Remap capslock to be escape
+- Enable key repeat: `defaults write -g ApplePressAndHoldEnabled -bool true`
 - Key repeat as fast as possible - https://github.com/mathiasbynens/dotfiles/issues/687
