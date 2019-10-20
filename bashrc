@@ -45,6 +45,9 @@ if `which hub > /dev/null`; then
   eval "$(hub alias -s)"
 fi
 
+### Anaconda
+export PATH="/usr/local/anaconda3/bin:$PATH"
+
 ##############################################################################
 # 02. Aliases                                                                #
 ##############################################################################
@@ -219,5 +222,14 @@ alias tt="tree -I 'node_modules|vendor'"
 # directories only
 alias ttd="tree -d -I 'node_modules|vendor'"
 
-alias gh=git browse
-alias github=git browse
+alias gh='hub browse'
+alias github='hub browse'
+
+alias fmtjson="python -m json.tool"
+it2_set_profile() { echo -e "\033]50;SetProfile=$1\a" }
+
+nth() { sed "$1q;d" $2 }
+
+# get `unbuffer` working on Mac
+# https://discourse.brew.sh/t/help-with-unbuffer-cant-find-package-expect/1645/7
+export TCLLIBPATH=“/usr/local/lib”

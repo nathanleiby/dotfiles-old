@@ -67,15 +67,18 @@ Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
 
 "" Git
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb' " Gbrowse
 "" Open to line in Github
-Plug 'ruanyl/vim-gh-line'
+"Plug 'ruanyl/vim-gh-line' " TODO: Use :Gbrowse instead
 
-"" Experimental...
 " Formatting
 Plug 'sbdchd/neoformat'
 
 " Highlighting
 Plug 'sheerun/vim-polyglot'
+
+"" Experimental...
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -366,6 +369,11 @@ cabbrev gml GoMetaLinter
 
 " cabbrev gd TSDef
 "" EXPERIMENTAL (END)
+
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 "" Enable Deoplete (autocompletion)
 let g:deoplete#enable_at_startup = 1

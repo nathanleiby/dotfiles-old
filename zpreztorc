@@ -14,6 +14,7 @@
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
+#zstyle ':prezto:module:prompt' theme 'spaceship'
 
 # Set the Zsh modules to load (man zshmodules).
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
@@ -96,7 +97,12 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
+#zstyle ':prezto:module:prompt' theme 'sorin'
+#zstyle ':prezto:module:prompt' theme 'minimal' # no colors
+#zstyle ':prezto:module:prompt' theme 'steeef' # too long
+zstyle ':prezto:module:prompt' theme 'pws'
+
+#zstyle ':prezto:module:prompt' theme 'powerlevel9k'
 
 #
 # Ruby
