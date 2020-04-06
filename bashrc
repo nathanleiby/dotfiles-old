@@ -22,21 +22,41 @@ export IGNOREEOF=1
 export PATH="/usr/local/anaconda3/bin:$PATH"
 # TODO: switch to mini-conda for control
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/local/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 ### Golang
 # Golang: Brew installed
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin # include go binaries in path
 export PATH=$PATH:$GOROOT/bin
 
 ### Git
 # if `hub` exists, add it as a Git alias
 if `which hub > /dev/null`; then
-  eval "$(hub alias -s)"
+    eval "$(hub alias -s)"
 fi
 
 ### CD
 # Add code dirs to CDPATH
-export CDPATH=.:~:~/go/src/github.com/Clever:~/go/src/github.com/nathanleiby
+export CDPATH=.:~:~/go/src/github.com/Clever:~/go/src/github.com/nathanleiby:~/go/src/github.com/:~/code
+
+### NVM (Node)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s .nvmrc ] && nvm use
 
 ##############################################################################
 # 02. Aliases                                                                #
@@ -89,6 +109,8 @@ alias gll="git log -1 --pretty=format:%H | tee /dev/tty | to_clipboard"  # git l
 alias glls="git log -1 --pretty=format:%H | cut -c 1-7 | tee /dev/tty | to_clipboard" # git last log short
 alias gcb="git rev-parse --abbrev-ref HEAD | tee /dev/tty | to_clipboard" # git current branch
 
+alias gsp="git stash pop"
+
 # Application shortcuts
 alias py='python'
 alias ipy='ipython'
@@ -126,7 +148,7 @@ it2_set_profile() { echo -e "\033]50;SetProfile=$1\a" } # switch between my Ligh
 # - reflex (github.com/cespare/reflex)
 # - richgo (https://github.com/kyoh86/richgo)
 watch_go_test() {
-  reflex -r '\.go$' -R vendor/ -- richgo test $@
+    reflex -r '\.go$' -R vendor/ -- richgo test $@
 }
 alias got=watch_go_test
 
@@ -136,12 +158,17 @@ alias got=watch_go_test
 
 ### Private Bash Profile: API Keys, etc
 if [ -f ~/.bash_profile_private ]; then
-  source $HOME/.bash_profile_private
+    source $HOME/.bash_profile_private
 else
-  echo "Could not find $HOME/.bash_profile_private. You may be missing API Keys, etc"
+    echo "Could not find $HOME/.bash_profile_private. You may be missing API Keys, etc"
 fi
 
 ##############################################################################
 # 04. Experimental (TBD if useful)
 ##############################################################################
+
+alias weather='curl v2.wttr.in'
+alias love10="/Applications/love-10.2.app/Contents/MacOS/love"
+alias love11="/Applications/love-11.3.app/Contents/MacOS/love"
+
 

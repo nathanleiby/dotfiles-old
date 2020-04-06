@@ -42,6 +42,7 @@ lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen
 lol = log --graph --decorate --pretty=oneline --abbrev-commit
 lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 ls = ls-files
+sp = stash pop
 
 # Show files ignored by git:
 ign = ls-files -o -i --exclude-standard
